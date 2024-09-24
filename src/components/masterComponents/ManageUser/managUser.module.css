@@ -1,0 +1,197 @@
+ 
+  .search-bar {
+    max-width: 300px;
+    margin-left: 10px;
+    padding: 5px 0;
+  }
+  .search-bar input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: transparent; /* Optional: Adjust the border color if needed */
+  }
+
+  .page-item.active .page-link {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+    outline: none;
+  }
+
+  
+  .table-title{
+    padding-top: 7px;
+  }
+
+  .tableHeader{
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 0;
+    padding: 0;
+    background-color: #5bc0de;
+  }
+
+  
+  .search-bar input {
+    border-radius: 0;
+  }
+  
+
+  .table {
+    margin: 0;
+    padding: 0;
+    height: 200px; 
+    overflow-y: auto;
+    border-right: 1px solid #0056b3;
+    border-left: 1px solid #5bc0de;
+    border-color: #e2e2e2;
+  }
+  
+  .table th {
+    text-align: center;
+    vertical-align: middle;
+    height: 10px !important;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .table tr{
+    font-weight: 400;
+    font-size: 12px;
+  }
+  
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .action-icon {
+    font-size: 1.2rem;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .action-icon:hover {
+    color: #0056b3;
+  }
+  
+  .paginationRow {
+    padding: 10px 10px;
+    background-color: #5bc0de;
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    gap: 10px;
+    height: 40px;
+    align-items: center;
+  }
+  
+  .pagination {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .page-item {
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    display: inline-block;
+    padding: 8px 12px;
+    color: #007bff;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .page-link:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .page-link:focus {
+    outline: none; /* Ensure no outline when focused */
+  }
+  
+  .page-item.active .page-link {
+    background-color: #62c1e8;
+    color: white;
+    border-color: #62c1e8;
+  }
+  
+  .page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+    /* border-color: #ddd; */
+  }
+
+
+.prev-next-button {
+    display: inline-block;
+    color: white;
+    background-color: #5bc0de;
+    text-decoration: none;
+    border: none;
+    transition: background-color 0.3s ease;
+    outline: none;
+  }
+  
+  .prev-next-button:hover {
+    border-color: #0056b3;
+    color: black;
+  }
+  
+.prev-next-button:focus {
+  outline: none; /* Ensure no outline when focused */
+}
+
+  .page-item.disabled .prev-next-button {
+    border-color: #ccc;
+    pointer-events: none;
+  }
+  
+
+  .custom-dropdown-button.dropdown-toggle {
+    border: none !important;
+}
+
+.custom-dropdown-button {
+    border: none !important;
+    background-color: white;
+    border-radius: 0;
+    box-shadow: none !important; 
+}
+
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px; /* Adjust gap as per your requirement */
+  margin-bottom: 15px;
+}
+
+.form-control {
+  flex: 1; /* This will make the inputs take the full width */
+  min-width: 45%; /* Adjust for smaller screens */
+}
+
+.form-full {
+  width: 100%; /* Full-width input, useful for fields like address */
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1d89cf;
+}
+
+.dialog-content {
+  padding: 20px;
+}
+
+.dialog-actions {
+  padding: 10px 20px;
+}

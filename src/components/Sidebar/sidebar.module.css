@@ -1,0 +1,163 @@
+/* Sidebar container */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #333;
+  color: white;
+  transition: width 0.3s ease;
+  overflow-y: auto;
+  /* position: fixed; Sidebar fixed to the side */
+}
+
+.collapsed {
+  width: 70px; /* Sidebar width when collapsed */
+}
+
+.sidebarItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Navigation link styles */
+.navLink {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  margin-top: 5px ;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.navLink:hover {
+  background-color: #444;
+}
+
+.subMenuLink {
+  display: flex;
+  align-items: center;
+  color: #ddd;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.subMenuLink:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Adjust icon sizes */
+.navLink .icon, .subMenuLink .icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  transition: font-size 0.3s ease;
+}
+
+.menuItem .icon {
+  margin-right: 10px;
+}
+
+
+/* .collapsed .navLink .icon, .collapsed .subMenuLink .icon {
+  font-size: 1.5rem; Increase icon size when collapsed 
+} */
+
+/* Text transitions when sidebar is collapsed */
+.navLink span, .menuItemContent span, .subMenuLink span {
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+.collapsed .navLink span, .collapsed .menuItemContent span, .collapsed .subMenuLink span {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Menu item styles */
+.menuItem {
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menuItem:hover {
+  background-color: #444;
+}
+
+.menuItemContent {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  margin-left: auto;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.subMenu {
+  list-style: none;
+  /* padding-left: 20px; */   /* uncomment these if you want to take some space from left on dropdown item, i have removed it here */
+  padding-left: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.subMenu.open {
+  max-height: 400px; 
+  opacity: 1;
+}
+
+.collapsed .subMenu {
+  display: none; 
+}
+
+/* Toggle button styles */
+.toggleBtn {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.toggleBtn:hover {
+  background-color: #555;
+}
+
+/* Active link styles */
+.activeLink {
+  color: white !important; /* Active text color */
+  /* border-radius: 10px; */
+  background-color: #878787; 
+  /* padding: 2px; */
+  border-left: 5px solid #007bff;
+
+}
+
+.activeLink .icon {
+  color: white; /* Active icon color */
+}
+
+.collapsed .activeLink {
+  background-color: #e0e0e0;
+}
+
+/* Additional spacing for a cleaner look */
+.navLink, .subMenuLink {
+  padding-left: 20px;
+}
+
+.collapsed .navLink, .collapsed .subMenuLink {
+  padding-left: 10px !important;
+}
