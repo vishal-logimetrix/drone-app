@@ -19,8 +19,13 @@ const Header = ({ toggleSidebar }) => {
   return (
     <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{
-          minHeight: '55px'
-    }}>
+          minHeight: "55px",
+          position: "fixed",  // Make the header fixed
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,  
+        }}>
       <div className="container-fluid">
         <button className="btn btn-light me-2" onClick={toggleSidebar}>
           <FaBars />

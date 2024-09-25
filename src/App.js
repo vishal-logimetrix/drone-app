@@ -20,6 +20,8 @@ import ProcessedImage from "./components/settingComponents/ProcessedImage";
 import ManageSnapBlock from "./components/masterComponents/ManageSnapBlock";
 import UserReport from "./components/settingComponents/UserReport";
 import PageNotFound from './components/PageNotFound'
+import UploadApk from './components/masterComponents/UploadAPK'
+import UploadKMZ from './components/masterComponents/UploadKMZ'
 import React from "react";
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
                     <Route path="/area" element={<ManageArea />} />
                     <Route path="/subarea" element={<ManageSubArea />} />
                     <Route path="/manageSnapBlock" element={<ManageSnapBlock />} />
+                    <Route path="/uploadAPK" element={<UploadApk />} />
+                    <Route path="/uploadKMZ" element={<UploadKMZ />} />
                     <Route path="/projectSites" element={<ProjectSites />} />
                     <Route path="/geoMapping" element={<GeoMapping />} />
                     <Route path="/dayWise" element={<DayWiseProject />} />

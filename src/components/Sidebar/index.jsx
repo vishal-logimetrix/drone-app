@@ -139,7 +139,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             </li>
             <li>
               <NavLink
-                to="/uploadApk"
+                to="/uploadAPK"
                 className={({ isActive }) =>
                   isActive
                     ? `${styles.subMenuLink} ${styles.activeLink}`
@@ -152,7 +152,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             </li>
             <li>
               <NavLink
-                to="/uploadKmz"
+                to="/uploadKMZ"
                 className={({ isActive }) =>
                   isActive
                     ? `${styles.subMenuLink} ${styles.activeLink}`

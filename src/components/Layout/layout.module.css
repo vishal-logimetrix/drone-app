@@ -1,15 +1,25 @@
-.layout_container {
+
+
+
+.layoutContainer {
     display: flex;
-    height: 100vh;  
-}
-
-.content_container {
-    flex: 1;  
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  
+  .contentContainer {
+    margin-top: 60px; 
     padding: 20px;
-    overflow-y: hidden;  
-}
-
-.outlet_container {
-    height: calc(100vh - 60px);  
+    width: 100%;
+    height: calc(100vh - 60px); 
     overflow-y: auto; 
-}
+  }
+  
+ 
+  .sidebar {
+    margin-top: 55px !important; 
+    height: calc(100vh - 55px);
+    overflow-y: auto;
+  }
+  

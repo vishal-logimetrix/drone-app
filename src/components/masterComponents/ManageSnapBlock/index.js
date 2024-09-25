@@ -139,7 +139,7 @@ const ManageSnapBlock = () => {
             <span className="mr-2">
               <FaBars style={{ marginRight: "10px" }} />
             </span>
-            Manage Snap Block
+            Snap Block Update
           </p>
         </Col>
         {/* <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
