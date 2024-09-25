@@ -18,6 +18,7 @@ const ManageUser = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
+  const [openUserDevice, setOpenUserDevice] = useState(false);
 
   const roles = [
     {
@@ -27,6 +28,7 @@ const ManageUser = () => {
       emailID: "rajat.seksaria@acme.in",
       mobileNo: 9999999999,
       roleName: "Ops Admin",
+      address: 'Mumbai'
     },
     {
       id: 2,
@@ -35,6 +37,7 @@ const ManageUser = () => {
       emailID: "amit.verma@acme.in",
       mobileNo: 8888888888,
       roleName: "Site User",
+      address: 'Pune'
     },
     {
       id: 3,
@@ -43,6 +46,7 @@ const ManageUser = () => {
       emailID: "nisha.gupta@acme.in",
       mobileNo: 7777777777,
       roleName: "Web User",
+      address: 'noida'
     },
     {
       id: 4,
@@ -51,6 +55,7 @@ const ManageUser = () => {
       emailID: "suresh.kumar@acme.in",
       mobileNo: 6666666666,
       roleName: "Zonal Head",
+      address: 'gurgram'
     },
     {
       id: 5,
@@ -59,6 +64,7 @@ const ManageUser = () => {
       emailID: "rina.singh@acme.in",
       mobileNo: 5555555555,
       roleName: "Manager",
+      address: 'jaypur'
     },
     {
       id: 6,
@@ -67,6 +73,7 @@ const ManageUser = () => {
       emailID: "vikas.sharma@acme.in",
       mobileNo: 4444444444,
       roleName: "Team Lead",
+      address: 'selam'
     },
     {
       id: 7,
@@ -75,6 +82,7 @@ const ManageUser = () => {
       emailID: "pooja.deshmukh@acme.in",
       mobileNo: 3333333333,
       roleName: "Developer",
+      address: 'solapur'
     },
     {
       id: 8,
@@ -83,63 +91,7 @@ const ManageUser = () => {
       emailID: "rajiv.nair@acme.in",
       mobileNo: 2222222222,
       roleName: "Analyst",
-    },
-    {
-      id: 9,
-      loginId: "USER0028",
-      Name: "Monika Arora",
-      emailID: "monika.arora@acme.in",
-      mobileNo: 1111111111,
-      roleName: "Ops Admin",
-    },
-    {
-      id: 10,
-      loginId: "USER0029",
-      Name: "Karan Patel",
-      emailID: "karan.patel@acme.in",
-      mobileNo: 9999991111,
-      roleName: "Site User",
-    },
-    {
-      id: 11,
-      loginId: "USER0030",
-      Name: "Simran Kaur",
-      emailID: "simran.kaur@acme.in",
-      mobileNo: 9999992222,
-      roleName: "Web User",
-    },
-    {
-      id: 12,
-      loginId: "USER0031",
-      Name: "Rahul Aggarwal",
-      emailID: "rahul.aggarwal@acme.in",
-      mobileNo: 9999993333,
-      roleName: "Zonal Head",
-    },
-    {
-      id: 13,
-      loginId: "USER0032",
-      Name: "Neha Saxena",
-      emailID: "neha.saxena@acme.in",
-      mobileNo: 9999994444,
-      roleName: "Manager",
-    },
-    {
-      id: 14,
-      loginId: "USER0033",
-      Name: "Aditya Desai",
-      emailID: "aditya.desai@acme.in",
-      mobileNo: 9999995555,
-      roleName: "Team Lead",
-    },
-    {
-      id: 15,
-      loginId: "USER0034",
-      Name: "Sonal Mehta",
-      emailID: "sonal.mehta@acme.in",
-      mobileNo: 9999996666,
-      roleName: "Developer",
-    },
+    }
   ];
 
   // State to hold form inputs
@@ -149,6 +101,9 @@ const ManageUser = () => {
   const [newUserMobile, setNewUserMobile] = useState("");
   const [newUserAddress, setNewUserAddress] = useState("");
   const [selectedDrone, setSelectedDrone] = useState("");
+  const [editMode, setEditMode] = useState(false); 
+  const [newRole, setNewRole] = useState('');
+  const [currentRoleId, setCurrentRoleId] = useState(null); 
 
   // Predefined lists
   const userRoles = [
@@ -183,11 +138,35 @@ const ManageUser = () => {
     setNewUserMobile("");
     setNewUserAddress("");
     setSelectedDrone("");
+    setEditMode(false);
+    setCurrentRoleId(null);
+    setCurrentRoleId(null);
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (role = null) => {
+    if (role) {
+      setEditMode(true);
+      setNewUserRole(role.roleName);
+      setNewUserName(role.Name);
+      setNewUserEmail(role.emailID);
+      setNewUserMobile(role.mobileNo);
+      setNewUserAddress(role.address);
+      setSelectedDrone(role.drone);
+      setCurrentRoleId(role.id);
+    } else {
+      setEditMode(false);
+      // setNewUserRole('');
+    }
     setOpen(true);
   };
+
+  const handleClickDeviceOpen = ()=>{
+    setOpenUserDevice(true);
+  }
+
+  const handleClickDeviceClose = ()=>{
+    setOpenUserDevice(false);
+  }
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -204,19 +183,11 @@ const ManageUser = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button" style={{
-          textAlign: "end",
-          marginBottom: "5px",
-        }}
-      >
-        <Button
-          onClick={handleClickOpen}
-          variant="contained"
-          aria-hidden="false"
+      <div className="button" style={{ textAlign: "end", marginBottom: "5px" }} >
+        <Button onClick={() => handleClickOpen(null)} variant="contained" aria-hidden="false"
           style={{
             backgroundColor: "#1d89cf",
-          }}
-        >
+          }} >
           <FaPlus style={{ marginRight: "5px" }} />
           Add User
         </Button>
@@ -270,10 +241,10 @@ const ManageUser = () => {
                 <td>{role.mobileNo}</td>
                 <td>{role.roleName}</td>
                 <td>
-                  <FaEdit className={styles["action-icon"]} /> |
-                  <FaTrash className={styles["action-icon"]} /> |
-                  <FaUserCog className={styles["action-icon"]} /> |
-                  <MdDevices className={styles["action-icon"]} />
+                  <FaEdit className={styles["action-icon"]} onClick={() => handleClickOpen(role)} title="edit" /> |
+                  <FaTrash className={styles["action-icon"]} title="delete" /> |
+                  <FaUserCog className={styles["action-icon"]} title="map user" /> |
+                  <MdDevices className={styles["action-icon"]} title="user device status" onClick={() => handleClickDeviceOpen()} />
                 </td>
               </tr>
             ))
@@ -314,10 +285,10 @@ const ManageUser = () => {
       />
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add User</DialogTitle>
+      <DialogTitle>{editMode ? 'Edit User' : 'Add User'}</DialogTitle>
         <DialogContent className={styles["dialog-content"]}>
-          <DialogContentText>
-            To add a user, please fill in the details below.
+        <DialogContentText>
+            {editMode ? 'Update the user details below.' : 'To add a user, please enter the details.'}
           </DialogContentText>
 
           <form onSubmit={submitForm}>
@@ -336,12 +307,12 @@ const ManageUser = () => {
               <TextField required id="mobile" label="Mobile" variant="outlined" className={styles["form-control"]}
                 value={newUserMobile} onChange={(e) => setNewUserMobile(e.target.value)} // Update state
               />
-              <TextField defaultValue variant="outlined" className={styles["form-control"]} value={newUserRole}
+              <TextField select required variant="outlined" className={styles["form-control"]} value={newUserRole}
                 onChange={(e) => setNewUserRole(e.target.value)} // Update state
                 SelectProps={{
                   native: true,
                 }} >
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue>
                   Select User Role
                 </option>
                 {userRoles.map((userRole) => (
@@ -363,7 +334,7 @@ const ManageUser = () => {
                   native: true,
                 }} >
                 {/* Default placeholder option */}
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue>
                   Select a drone
                 </option>
                 {drones.map((drone, index) => (
@@ -384,6 +355,20 @@ const ManageUser = () => {
           </form>
         </DialogContent>
       </Dialog>
+
+      <Dialog open = {openUserDevice}>
+        <DialogTitle>User Device Status</DialogTitle>    
+        <DialogContent className={styles["dialog-content"]}>  
+            <p>Device status : </p>   
+            <p>Network Type : </p>   
+            <p>Network Signal : </p>   
+        </DialogContent> 
+        <DialogActions>
+              <Button onClick={handleClickDeviceClose}>Cancel</Button>
+            </DialogActions> 
+      </Dialog>
+
+
     </div>
   );
 };
