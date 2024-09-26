@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from 'react-select';
 import { Table, InputGroup, FormControl, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import Button from "@mui/material/Button";
@@ -19,6 +20,7 @@ const ManageUser = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
   const [openUserDevice, setOpenUserDevice] = useState(false);
+  const [openMapUser, setOpenMapUser] = useState(false);
 
   const roles = [
     {
@@ -94,6 +96,17 @@ const ManageUser = () => {
     }
   ];
 
+  const options = [
+    { value: 'KREDL-Guledgudda-15MW', label: 'KREDL-Guledgudda-15MW' },
+    { value: 'KREDL-Sidlaghatta-20MW', label: 'KREDL-Sidlaghatta-20MW' },
+    { value: 'KREDL-Sandur-20MW', label: 'KREDL-Sandur-20MW' },
+    { value: 'MSEDCL-Chittorgarh-250MW', label: 'MSEDCL-Chittorgarh-250MW' },
+    { value: 'MSEDCL2-Badisidd-300MW', label: 'MSEDCL2-Badisidd-300MW' },
+    { value: 'TEST-IT', label: 'TEST-IT' },
+  ];
+
+
+
   // State to hold form inputs
   const [newUserRole, setNewUserRole] = useState("");
   const [newUserName, setNewUserName] = useState("");
@@ -102,8 +115,9 @@ const ManageUser = () => {
   const [newUserAddress, setNewUserAddress] = useState("");
   const [selectedDrone, setSelectedDrone] = useState("");
   const [editMode, setEditMode] = useState(false); 
-  const [newRole, setNewRole] = useState('');
+  const [userName, setUserName] = useState('');
   const [currentRoleId, setCurrentRoleId] = useState(null); 
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   // Predefined lists
   const userRoles = [
@@ -164,8 +178,25 @@ const ManageUser = () => {
     setOpenUserDevice(true);
   }
 
+  const handleChange = (selected) => {
+    setSelectedOptions(selected);
+  };
+
   const handleClickDeviceClose = ()=>{
     setOpenUserDevice(false);
+  }
+
+  const handleClickMapUserOpen = (role)=>{
+    setUserName(role.Name);
+    setOpenMapUser(true)
+  } 
+  const handleClickMapUserClose = ()=>{
+    setSelectedOptions([]);
+    setOpenMapUser(false)
+  }
+  const handleClickMapUserSave = ()=>{
+    console.log('Selected options:', selectedOptions);
+    setOpenMapUser(false)
   }
 
   const submitForm = (event) => {
@@ -187,8 +218,10 @@ const ManageUser = () => {
         <Button onClick={() => handleClickOpen(null)} variant="contained" aria-hidden="false"
           style={{
             backgroundColor: "#1d89cf",
+            textTransform: 'none',
+           fontWeight: 300
           }} >
-          <FaPlus style={{ marginRight: "5px" }} />
+          <FaPlus style={{ marginRight: "5px", fontWeight: 900}} />
           Add User
         </Button>
       </div>
@@ -196,14 +229,14 @@ const ManageUser = () => {
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles["table-title"]}>
             <span className="mr-2">
-              <FaBars style={{ marginRight: "10px" }} />
+              <FaBars style={{ marginRight: "10px", color: '#fff' }} />
             </span>
             Manage Users
           </p>
         </Col>
         <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
           <div className="d-flex align-items-center" style={{ height: "40px" }}>
-            <span className="mr-2">Per page: &nbsp;</span>
+            <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
             <DropdownButton title={itemsPerPage} onSelect={(value) => setItemsPerPage(Number(value))}
               variant="transparent" className={`${styles["custom-dropdown-button"]}`} >
               <Dropdown.Item eventKey="5">5</Dropdown.Item>
@@ -212,7 +245,7 @@ const ManageUser = () => {
             </DropdownButton>
           </div>
           <InputGroup className={`${styles["search-bar"]}`}>
-            <FormControl placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
+            <FormControl  placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
           </InputGroup>
         </Col>
       </Row>
@@ -243,7 +276,7 @@ const ManageUser = () => {
                 <td>
                   <FaEdit className={styles["action-icon"]} onClick={() => handleClickOpen(role)} title="edit" /> |
                   <FaTrash className={styles["action-icon"]} title="delete" /> |
-                  <FaUserCog className={styles["action-icon"]} title="map user" /> |
+                  <FaUserCog className={styles["action-icon"]} title="map user" onClick={() => handleClickMapUserOpen(role)} /> |
                   <MdDevices className={styles["action-icon"]} title="user device status" onClick={() => handleClickDeviceOpen()} />
                 </td>
               </tr>
@@ -287,7 +320,7 @@ const ManageUser = () => {
       <Dialog open={open} onClose={handleClose}>
       <DialogTitle>{editMode ? 'Edit User' : 'Add User'}</DialogTitle>
         <DialogContent className={styles["dialog-content"]}>
-        <DialogContentText>
+        <DialogContentText className="mb-3">
             {editMode ? 'Update the user details below.' : 'To add a user, please enter the details.'}
           </DialogContentText>
 
@@ -347,7 +380,7 @@ const ManageUser = () => {
 
             {/* Submit Button */}
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
+              <Button id="dialog-button" onClick={handleClose}>Cancel</Button>
               <Button type="submit" variant="contained" color="primary">
                 Submit
               </Button>
@@ -367,6 +400,28 @@ const ManageUser = () => {
               <Button onClick={handleClickDeviceClose}>Cancel</Button>
             </DialogActions> 
       </Dialog>
+
+
+      <Dialog open={openMapUser} maxWidth="sm" fullWidth>
+      <DialogTitle>Map {userName} with project</DialogTitle>
+      <DialogContent>
+        <Select
+          value={selectedOptions}
+          onChange={handleChange}
+          options={options}
+          isMulti
+          menuPortalTarget={document.body}  
+          menuPosition="fixed"  
+          styles={{
+            menuPortal: (base) => ({ ...base, zIndex: 9999 })  
+          }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClickMapUserClose}>Close</Button>
+        <Button onClick={handleClickMapUserSave}>Save</Button>
+      </DialogActions>
+    </Dialog>
 
 
     </div>

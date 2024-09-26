@@ -33,6 +33,7 @@ const ManageSnapBlock = () => {
     { id: 6, areaName: "ICR 18" },
     { id: 7, areaName: "ICR 17" },
   ];
+  
   const drones = ["Drone A", "Drone B", "Drone C"];
 
   const filteredRoles = roles.filter((role) =>
@@ -95,7 +96,15 @@ const ManageSnapBlock = () => {
          SelectProps={{
             native: true,
           }}
-        >
+          sx={{
+            height: '40px', 
+          }}
+          InputProps={{
+            style: {
+              height: '40px',  
+            }
+          }} 
+          >
           {/* Default placeholder option */}
           <option value="" disabled defaultValue>
             Select a drone
@@ -107,17 +116,18 @@ const ManageSnapBlock = () => {
           ))}
         </TextField>
 
-         <TextField
-         type="date"
-         required
-         id="date"
-         variant="outlined"
-        className= {styles['form-control']}
-         ></TextField>
+         <TextField type="date" required id="date" variant="outlined" className= {styles['form-control']} 
+         sx={{
+          height: '40px', 
+        }}
+        InputProps={{
+          style: {
+            height: '40px',  
+          }
+        }} 
+        ></TextField>
 
-        <Button variant="contained" style={{
-            textAlign: 'center',
-        }}>Search</Button>
+        <Button variant="contained" className= {styles['form-control']} style={{ textAlign: 'center', }}>Search</Button>
 
 
         {/* <Button 
@@ -131,13 +141,11 @@ const ManageSnapBlock = () => {
           Add Sub Area
         </Button> */}
       </div>
-      <Row
-        className={`${styles.tableHeader} align-items-center justify-content-between`}
-      >
+      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles["table-title"]}>
             <span className="mr-2">
-              <FaBars style={{ marginRight: "10px" }} />
+              <FaBars style={{ marginRight: "10px", fontWeight: 900 }} />
             </span>
             Snap Block Update
           </p>
@@ -183,12 +191,9 @@ const ManageSnapBlock = () => {
                 <td>{role.id}</td>
                 <td>{role.areaName}</td>
                 <td>
-                  <FaEdit
-                    className={styles["action-icon"]}
-                    title="Edit"
-                    onClick={() => handleClickOpen(role)} // Open dialog in edit mode with current role
-                  />{" "}
-                  |
+                  <FaEdit className={styles["action-icon"]} title="Edit"
+                    onClick={() => handleClickOpen(role)} />
+                    {" "} |
                   <FaTrash className={styles["action-icon"]} title="Delete" />
                 </td>
               </tr>

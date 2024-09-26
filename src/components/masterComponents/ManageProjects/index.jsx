@@ -89,14 +89,13 @@ const ManageProjects = () => {
         textAlign: 'end',
         marginBottom: '5px'
       }}>
-        <Button 
-        onClick={() => handleClickOpen(null)} 
-        variant="contained"
-        aria-hidden="false"
+        <Button onClick={() => handleClickOpen(null)}  variant="contained" aria-hidden="false"
         style={{
-          backgroundColor: '#1d89cf'
+          backgroundColor: '#1d89cf',
+          textTransform: 'none',
+          fontWeight: 300
         }}>
-          <FaPlus style={{ marginRight: '5px' }} />
+          <FaPlus style={{ marginRight: '5px', fontWeight: 800 }} />
           Add Project
         </Button>
       </div>
@@ -104,13 +103,13 @@ const ManageProjects = () => {
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles['table-title']}>
             <span className="mr-2">
-            <FaBars style={{ marginRight: '10px' }} />
+            <FaBars style={{ marginRight: '10px', color: '#fff' }} />
             </span>Manage Projects
           </p>
         </Col>
         <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
           <div className="d-flex align-items-center" style={{height: '40px'}}>
-            <span className="mr-2">Per page: &nbsp;</span>
+            <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
             <DropdownButton
                 title={itemsPerPage}
                 onSelect={(value) => setItemsPerPage(Number(value))}

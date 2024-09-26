@@ -90,14 +90,13 @@ const ManageSubArea = () => {
         textAlign: 'end',
         marginBottom: '5px'
       }}>
-        <Button 
-        onClick={() => handleClickOpen(null)} 
-        variant="contained"
-        aria-hidden="false"
+        <Button onClick={() => handleClickOpen(null)} variant="contained" aria-hidden="false"
         style={{
-          backgroundColor: '#1d89cf'
+          backgroundColor: '#1d89cf',
+          color: '#fff',
+          textTransform: 'none'
         }}>
-          <FaPlus style={{ marginRight: '5px' }} />
+          <FaPlus style={{ marginRight: '5px', fontWeight: 900 }} />
           Add Sub Area
         </Button>
       </div>

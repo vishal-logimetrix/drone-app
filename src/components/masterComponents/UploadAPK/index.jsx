@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Table, InputGroup, FormControl, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
 import ReactPaginate from "react-paginate";
 import Button from "@mui/material/Button";
-import { FaBars, FaEdit, FaTrash } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -22,13 +22,13 @@ const UploadApk = () => {
   const [editMode, setEditMode] = useState(false);
   const [currentRoleId, setCurrentRoleId] = useState(null);
   const [error, setError] = useState(""); // State to manage error message
-  const [selectedDrone, setSelectedDrone] = useState("");
+
 
   const roles = [
     { id: 1, apk: "1551531100drone.apk", version: 2},
     { id: 2, apk: "1562245183Drone 2.0.apk", version: 1.1 },
   ];
-  const drones = ["Drone A", "Drone B", "Drone C"];
+ 
 
   const filteredRoles = roles.filter((role) =>
     role.apk.toLowerCase().includes(searchTerm.toLowerCase())
@@ -52,24 +52,24 @@ const UploadApk = () => {
     setError(""); // Reset error message on close
   };
 
-  const handleClickOpen = (role = null) => {
-    if (role) {
-      setEditMode(true);
-      setNewRole(role.apk);
-      setCurrentRoleId(role.id);
-    } else {
-      setEditMode(false);
-      setNewRole("");
-    }
-    setOpen(true);
-  };
+  // const handleClickOpen = (role = null) => {
+  //   if (role) {
+  //     setEditMode(true);
+  //     setNewRole(role.apk);
+  //     setCurrentRoleId(role.id);
+  //   } else {
+  //     setEditMode(false);
+  //     setNewRole("");
+  //   }
+  //   setOpen(true);
+  // };
 
   const submitForm = (event) => {
     event.preventDefault();
 
     if (newRole.trim() === "") {
-      setError("Manage Snap name is required."); // Set error message if input is empty
-      return; // Stop the form submission
+      setError("Manage Snap name is required.");  
+      return;  
     }
 
     if (editMode) {
@@ -86,26 +86,33 @@ const UploadApk = () => {
   return (
     <div className={styles["user-role-table"]}>
       <div className="button" style={{ textAlign: "flex-start", marginBottom: "5px", display: 'flex', gap: '10px'}} >
-        <TextField  variant="outlined" className={styles["form-control"]} type="text" label='Enter Version'>
+        <TextField  variant="outlined" className={styles["form-control"]} type="text" label='Enter Version'
+        sx={{
+          height: '40px', 
+        }}
+        InputProps={{
+          style: {
+            height: '40px',  
+          }
+        }} />
 
-        </TextField>
-
-         <TextField
-         type="file"
-         required
-         id="file"
-         variant="outlined"
-        className= {styles['form-control']}
-         ></TextField>
+         <TextField type="file" required id="file" variant="outlined" className= {styles['form-control']}
+        sx={{
+          height: '40px', 
+        }}
+        InputProps={{
+          style: {
+            height: '40px',  
+          }
+        }} />
 
         <Button variant="contained" style={{
             textAlign: 'center',
-        }}>Upload</Button>
+        }}>
+          Upload</Button>
 
       </div>
-      <Row
-        className={`${styles.tableHeader} align-items-center justify-content-between`}
-      >
+      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles["table-title"]}>
             <span className="mr-2">
@@ -116,13 +123,9 @@ const UploadApk = () => {
         </Col>
         <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
           <div className="d-flex align-items-center" style={{height: '40px'}}>
-            <span className="mr-2">Per page: &nbsp;</span>
-            <DropdownButton
-                title={itemsPerPage}
-                onSelect={(value) => setItemsPerPage(Number(value))}
-                variant="transparent"  
-                className={`${styles['custom-dropdown-button']}`}
-            >
+            <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
+            <DropdownButton title={itemsPerPage} onSelect={(value) => setItemsPerPage(Number(value))} variant="transparent"  
+                className={`${styles['custom-dropdown-button']}`} >
                 <Dropdown.Item eventKey="5">5</Dropdown.Item>
                 <Dropdown.Item eventKey="10">10</Dropdown.Item>
                 <Dropdown.Item eventKey="15">15</Dropdown.Item>

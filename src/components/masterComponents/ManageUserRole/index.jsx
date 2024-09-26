@@ -91,28 +91,27 @@ const ManageUserRole = () => {
         textAlign: 'end',
         marginBottom: '5px'
       }}>
-        <Button 
-        onClick={() => handleClickOpen(null)} 
-        variant="contained"
-        aria-hidden="false"
+        <Button  onClick={() => handleClickOpen(null)}  variant="contained" aria-hidden="false"
         style={{
-          backgroundColor: '#1d89cf'
+          backgroundColor: '#1d89cf',
+           textTransform: 'none',
+           fontWeight: 300
         }}>
-          <FaPlus style={{ marginRight: '5px' }} />
+          <FaPlus style={{ marginRight: '5px' , fontWeight: 900}} />
           Add User Role
         </Button>
       </div>
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`}>
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles['table-title']}>
-            <span className="mr-2">
-            <FaBars style={{ marginRight: '10px' }} />
+            <span className="mr-2" >
+            <FaBars style={{ marginRight: '10px', color: '#fff' }} />
             </span>Manage User Role
           </p>
         </Col>
         <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
           <div className="d-flex align-items-center" style={{height: '40px'}}>
-            <span className="mr-2">Per page: &nbsp;</span>
+            <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
             <DropdownButton
                 title={itemsPerPage}
                 onSelect={(value) => setItemsPerPage(Number(value))}
@@ -150,11 +149,8 @@ const ManageUserRole = () => {
               <td>{index + 1 + currentPage * itemsPerPage}</td>
               <td>{role.roleName}</td>
               <td>
-                <FaEdit 
-                  className={styles['action-icon']} 
-                  title='Edit' 
-                  onClick={() => handleClickOpen(role)} // Open dialog in edit mode with current role
-                /> |
+                <FaEdit className={styles['action-icon']}  title='Edit' 
+                  onClick={() => handleClickOpen(role)} /> |
                 <FaTrash className={styles['action-icon']} title='Delete' />
               </td>
             </tr>
@@ -195,25 +191,14 @@ const ManageUserRole = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog open={open} onClose={handleClose} >
         <DialogTitle>{editMode ? 'Edit User Role' : 'Add User Role'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             {editMode ? 'Update the role name below.' : 'To add a user role, please enter the role name.'}
           </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="role"
-            label={editMode ? 'Edit User Role' : 'Add User Role'}
-            type="text"
-            fullWidth
-            variant="standard"
-            value={newRole} 
+          <TextField autoFocus required margin="dense" id="role" label={editMode ? 'Edit User Role' : 'Add User Role'}
+            type="text" fullWidth variant="standard" value={newRole} 
             onChange={(e) => {
               setNewRole(e.target.value);
               setError(''); // Clear error message on input change

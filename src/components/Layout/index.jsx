@@ -33,8 +33,17 @@ const Layout = () => {
   const breadcrumbs = location.pathname.split('/').filter(x => x).map((segment, index) => {
     const path = `/${segment}`;
     return (
-      <Breadcrumb.Item key={index} linkAs={Link} linkProps={{ to: path }}>
-        {segment.charAt(0).toUpperCase() + segment.slice(1)}
+      <Breadcrumb.Item
+        key={index}
+        linkAs={Link}
+        linkProps={{ to: path, style: { color: '#999', textDecoration: 'none' } }}
+        className={styles.breadcrumbLink} 
+        style={{
+          color: '#999',
+          textDecoration: 'none'
+        }}
+      >
+        {segment}
       </Breadcrumb.Item>
     );
   });
@@ -44,12 +53,11 @@ const Layout = () => {
       <Header toggleSidebar={toggleSidebar} isCollapsed={isCollapsed} />
 
       <div className={styles.layoutContainer}>
-        {/* Sidebar with the correct className */}
         <Sidebar className={styles.sidebar} isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
         
         <div className={styles.contentContainer}>
           <Breadcrumb>
-            <Breadcrumb.Item linkAs={Link} linkProps={{ to: '/dashboard' }}>
+            <Breadcrumb.Item linkAs={Link} linkProps={{ to: '/dashboard', style: { color: '#999', textDecoration: 'none', fontWeight: '600' } }} className={styles.breadcrumbLink} >
               Home
             </Breadcrumb.Item>
             {breadcrumbs}

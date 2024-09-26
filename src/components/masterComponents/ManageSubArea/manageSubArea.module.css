@@ -1,6 +1,6 @@
  
   .search-bar {
-    max-width: 300px;
+    max-width: 200px;
     margin-left: 10px;
     padding: 5px 0;
   }
@@ -18,7 +18,8 @@
 
   
   .table-title{
-    padding-top: 7px;
+    padding-top: 8px;
+    color: #fff;
   }
 
   .tableHeader{
@@ -67,7 +68,7 @@
     font-size: 1.2rem;
     margin: 0 10px;
     cursor: pointer;
-    color: #007bff;
+    color: #5bc0de;
   }
   
   .action-icon:hover {

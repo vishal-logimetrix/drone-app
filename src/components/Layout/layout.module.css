@@ -1,13 +1,10 @@
 
-
-
 .layoutContainer {
     display: flex;
     flex-direction: row;
     height: 100vh;
   }
-  
-  
+
   .contentContainer {
     margin-top: 60px; 
     padding: 20px;
@@ -15,11 +12,25 @@
     height: calc(100vh - 60px); 
     overflow-y: auto; 
   }
-  
- 
+
   .sidebar {
     margin-top: 55px !important; 
     height: calc(100vh - 55px);
     overflow-y: auto;
+  }
+  
+                      
+  .breadcrumbLink {                                              
+    color: #999 !important;
+    font-size: 14px;
+    line-height: 10px;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize; 
+    text-decoration: none !important;
+  }
+  
+  .breadcrumbLink:hover {
+    color: #333; 
   }
   

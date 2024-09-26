@@ -23,6 +23,8 @@ const UploadKMZ = () => {
   const [currentRoleId, setCurrentRoleId] = useState(null);
   const [error, setError] = useState(""); // State to manage error message
   const [selectedDrone, setSelectedDrone] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+
 
   const roles = [
     { id: 1, project: "MSEDCL-Chittorgarh-250MW", uploadDate: '12/06/2019 12:44:52'},
@@ -84,43 +86,93 @@ const UploadKMZ = () => {
     handleClose();
   };
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!selectedDrone) {
+      alert("Please select a project.");
+      return;
+    }
+
+    if (!selectedFile) {
+      alert("Please select a file.");
+      return;
+    }
+
+    // Log the selected values (or handle them accordingly)
+    console.log("Selected Project:", selectedDrone);
+    console.log("Selected File:", selectedFile);
+    // You can now send these values to a backend or use them as needed
+  };
+
+
+
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button" style={{ textAlign: "flex-start", marginBottom: "5px", display: 'flex', gap: '10px'}} >
-      <TextField
-                select
-                variant="outlined"
-                className={styles['form-control']}
-                value={selectedDrone}
-                onChange={(e) => setSelectedDrone(e.target.value)}  // Update state
-                SelectProps={{
-                  native: true,
-                }}
-              >
-                {/* Default placeholder option */}
-                <option value="" disabled defaultValue>
-                  Select a Project
-                </option>
-                {drones.map((drone) => (
-                  <option key={drone} value={drone}>
-                    {drone}
-                  </option>
-                ))}
-              </TextField>
+<form onSubmit={handleSubmit}> {/* Form wrapper for submit */}
+        <div
+          className="button"
+          style={{
+            textAlign: "flex-start",
+            marginBottom: "5px",
+            display: "flex",
+            gap: "10px",
+          }}
+        >
+          <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone}
+            onChange={(e) => setSelectedDrone(e.target.value)} // Update state
+            SelectProps={{
+              native: true,
+            }}
+            sx={{
+              height: "40px",
+            }}
+            InputProps={{
+              style: {
+                height: "40px",
+              },
+            }}
+          >
+            {/* Default placeholder option */}
+            <option value="" disabled defaultValue>
+              Select a Project
+            </option>
+            {drones.map((drone) => (
+              <option key={drone} value={drone}>
+                {drone}
+              </option>
+            ))}
+          </TextField>
 
-         <TextField
-         type="file"
-         required
-         id="file"
-         variant="outlined"
-        className= {styles['form-control']}
-         ></TextField>
+          <TextField
+            type="file"
+            required
+            id="file"
+            variant="outlined"
+            className={styles["form-control"]}
+            onChange={(e) => setSelectedFile(e.target.files[0])} // Handle file selection
+            sx={{
+              height: "40px",
+            }}
+            InputProps={{
+              style: {
+                height: "40px",
+              },
+            }}
+          />
 
-        <Button variant="contained" style={{
-            textAlign: 'center',
-        }}>Upload</Button>
-
-      </div>
+          <Button
+            type="submit" // Submit button
+            variant="contained"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Upload
+          </Button>
+        </div>
+      </form>
       {/* <Row
         className={`${styles.tableHeader} align-items-center justify-content-between`}
       >
