@@ -1,4 +1,4 @@
-
+import Context from './Context';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -19,13 +19,25 @@ import DailyProject from "./components/reportComponents/DailyProject";
 import ProcessedImage from "./components/reportComponents/ProcessedImage";
 import ManageSnapBlock from "./components/masterComponents/ManageSnapBlock";
 import UserReport from "./components/reportComponents/UserReport";
-import PageNotFound from './components/PageNotFound'
-import UploadApk from './components/masterComponents/UploadAPK'
-import UploadKMZ from './components/masterComponents/UploadKMZ'
-import React from "react";
+import PageNotFound from './components/PageNotFound';
+import UploadApk from './components/masterComponents/UploadAPK';
+import UploadKMZ from './components/masterComponents/UploadKMZ';
+import AllNotifications from './components/AllNotifications';
+// import React, { useState } from "react";
 
 function App() {
+
+    // const [ products, setProducts ] = useState(null)
+    // const [ session, setSession ] = useState(null)
     return (
+
+        
+
+        <Context.Provider>    
+            {/* in these context tag add the value attribute of the state for example 
+            <Context.Provider value={{products, setProducts, session, setSession}}> 
+            like these and from which component you want to store the value in context store using setProduct and use using product state like these.
+            */}
         <BrowserRouter>
             <Routes>
                 {/* <Route path="/" element={<Login />} /> */}
@@ -33,6 +45,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Layout />} >
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="/allNotifications" element={<AllNotifications />} />
                     <Route path="/manageUserRole" element={<ManageUserRole />} />
                     <Route path="/manageUser" element={<ManageUser />} />
                     <Route path="/manageProjects" element={<ManageProjects />} />
@@ -52,6 +65,7 @@ function App() {
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
+        </Context.Provider>
     );
 }
 

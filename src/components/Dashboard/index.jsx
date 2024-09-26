@@ -1,14 +1,46 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
+import React, { useState, useEffect } from "react";
+import { Card, ListGroup, Badge, Button } from "react-bootstrap";
 import { FaUser } from "react-icons/fa";
 import { PiCarBattery } from "react-icons/pi";
-import { MdOutlineNotificationsActive } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { MdOutlineNotificationsActive, MdPerson } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 import styles from './dashboard.module.css'
 
 const Dashboard = () => {
+
+  const [notifications, setNotifications] = useState([]);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Simulate an API call with dummy data
+    const dummyNotifications = [
+      {
+        userName: "Mohit Kumar",
+        userId: "ACME002",
+        timestamp: "2024-09-26T15:21:32",
+      },
+      {
+        userName: "Mohit Kumar",
+        userId: "ACME002",
+        timestamp: "2024-09-26T11:51:49",
+      },
+      {
+        userName: "Mohit Kumar",
+        userId: "ACME002",
+        timestamp: "2024-09-26T08:52:35",
+      },
+    ];
+
+    // Set the dummy notifications to simulate data loading
+    setNotifications(dummyNotifications);
+  }, []);
+
+  const navigateToAllNotifications = () => {
+    // Use the navigate function to navigate programmatically
+    navigate('/allNotifications');
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -188,42 +220,64 @@ const Dashboard = () => {
         </div>
 
         <div className="col-12 col-md-4 mb-4">
-          <Card style={{ width: "100%", borderRadius: 0, borderColor: "#e66454" }}
-          >
-            <ListGroup variant="flush">
-              {/* Header */}
-              <ListGroup.Item
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  backgroundColor: "#e66454",
-                  height: "35px",
-                  color: "white",
-                  padding: "0 10px",
-                  borderRadius: 0,
-                }} >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }} >
-                  <MdOutlineNotificationsActive style={{ fontSize: "20px" }} />
-                  <p style={{ margin: 0 }}>Notification</p>
-                </div>
-                <Link href="#" style={{ color: "#d6c9e2", fontSize: "14px" }}>
-                  View all
-                </Link>
-              </ListGroup.Item>
+        <Card style={{ width: "100%", borderRadius: 0, borderColor: "#e66454" }}>
+          <ListGroup variant="flush">
+        {/* Header */}
+        <ListGroup.Item
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            backgroundColor: "#e66454",
+            height: "35px",
+            color: "white",
+            padding: "0 10px",
+            borderRadius: 0,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <MdOutlineNotificationsActive style={{ fontSize: "20px" }} />
+            <p style={{ margin: 0 }}>Notification</p>
+          </div>
+          <Button variant="link"  style={{ color: "#d6c9e2", fontSize: "14px", textDecoration: "underline" }} onClick={navigateToAllNotifications}>
+            View all
+          </Button>
+        </ListGroup.Item>
 
-              {/* Content */}
-              <ListGroup.Item
-                style={{
-                  textAlign: "center",
-                  color: "#d6c9e2",
-                  fontSize: "16px",
-                  height: "50px",
-                }} >
-                No Notification found...
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
+        {/* Content */}
+        {notifications.length === 0 ? (
+          <ListGroup.Item
+            style={{
+              textAlign: "center",
+              color: "#d6c9e2",
+              fontSize: "16px",
+              height: "50px",
+            }} >
+            No Notification found...
+          </ListGroup.Item>
+        ) : (
+          notifications.map((notification, index) => (
+            <ListGroup.Item key={index}
+              style={{
+                // display: "flex",
+                // alignItems: "center",
+                // justifyContent: "space-between",
+                padding: "10px",
+                borderBottom: "1px solid #f1f1f1",
+              }} >
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <MdPerson style={{ fontSize: "20px", color: "#8c8c8c" }} />
+                <span>Login by field user</span>
+              </div>
+              <Badge className={styles['custom-badge']} >
+                {notification.userName}-{notification.userId}{" "}
+                ({new Date(notification.timestamp).toLocaleString()})
+              </Badge>
+            </ListGroup.Item>
+          ))
+        )}
+      </ListGroup>
+    </Card>
         </div>
       </div>
     </div>

@@ -160,6 +160,9 @@ const UploadKMZ = () => {
                 height: "40px",
               },
             }}
+            inputProps={{
+              accept: '.apk', // Restrict to .apk files
+            }}
           />
 
           <Button
