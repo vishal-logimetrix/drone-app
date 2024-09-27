@@ -91,7 +91,7 @@ const ManageUserRole = () => {
         textAlign: 'end',
         marginBottom: '5px'
       }}>
-        <Button  onClick={() => handleClickOpen(null)}  variant="contained" aria-hidden="false"
+        <Button  onClick={() => handleClickOpen(null)}  variant="contained" 
         style={{
           backgroundColor: '#1d89cf',
            textTransform: 'none',
@@ -191,7 +191,7 @@ const ManageUserRole = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>{editMode ? 'Edit User Role' : 'Add User Role'}</DialogTitle>
         <DialogContent>
           <DialogContentText>

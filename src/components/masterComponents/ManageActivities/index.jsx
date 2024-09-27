@@ -190,10 +190,7 @@ const ManageActivities = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth >
         <DialogTitle>{editMode ? 'Update Activity' : 'Add Activity'}</DialogTitle>
         <DialogContent>
           <DialogContentText>

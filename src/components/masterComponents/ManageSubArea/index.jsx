@@ -195,25 +195,14 @@ const ManageSubArea = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth >
         <DialogTitle>{editMode ? 'Update Sub Area' : 'Add Sub Area'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             {editMode ? 'Update the Sub Area below.' : 'To add a new Sub Area, please enter the Sub Area name.'}
           </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="role"
-            label={editMode ? 'Update Sub Area' : 'Add Sub Area'}
-            type="text"
-            fullWidth
-            variant="standard"
-            value={newRole} 
+          <TextField autoFocus required margin="dense" id="role" label={editMode ? 'Update Sub Area' : 'Add Sub Area'}
+            type="text" fullWidth variant="standard" value={newRole} 
             onChange={(e) => {
               setNewRole(e.target.value);
               setError(''); // Clear error message on input change

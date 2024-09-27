@@ -90,6 +90,7 @@ const ManageSnapBlock = () => {
   };
 
   return (
+    
     <div className={styles["user-role-table"]}>
       <div className="button" style={{ textAlign: "flex-start", marginBottom: "5px", display: 'flex', gap: '10px'}} >
         <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone} onChange={(e) => setSelectedDrone(e.target.value)} // Update state
@@ -129,18 +130,8 @@ const ManageSnapBlock = () => {
 
         <Button variant="contained" className= {styles['form-control']} style={{ textAlign: 'center', }}>Search</Button>
 
-
-        {/* <Button 
-        onClick={() => handleClickOpen(null)} 
-        variant="contained"
-        aria-hidden="false"
-        style={{
-          backgroundColor: '#1d89cf'
-        }}>
-          <FaPlus style={{ marginRight: '5px' }} />
-          Add Sub Area
-        </Button> */}
       </div>
+
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles["table-title"]}>
@@ -235,7 +226,7 @@ const ManageSnapBlock = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth >
         <DialogTitle>
           {editMode ? "Update Manage Snap Block" : "Add Snap Block"}
         </DialogTitle>

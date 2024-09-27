@@ -24,8 +24,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
               isActive
                 ? `${styles.navLink} ${styles.activeLink}`
                 : styles.navLink
-            }
-          >
+            } >
             <FaTachometerAlt className={styles.icon} />
             {!isCollapsed && <span>Dashboard</span>}
           </NavLink>

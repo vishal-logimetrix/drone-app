@@ -259,7 +259,7 @@ const GeoMapping = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button"
+      <div className={styles["button"]}
         style={{
           textAlign: "flex-start",
           marginBottom: "5px",

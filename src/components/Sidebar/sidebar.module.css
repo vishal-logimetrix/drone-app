@@ -6,11 +6,16 @@
   color: white;
   transition: width 0.3s ease;
   overflow-y: auto;
-  /* position: fixed; Sidebar fixed to the side */
 }
 
+/* these css is to display the only icons on the sidebar collapse state, now it is collapse 100 %  */
+
+/* .collapsed {
+  width: 70px;  
+} */
+
 .collapsed {
-  width: 70px; /* Sidebar width when collapsed */
+  width: 0;  
 }
 
 .sidebarItems {

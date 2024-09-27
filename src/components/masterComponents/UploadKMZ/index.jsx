@@ -267,7 +267,7 @@ const UploadKMZ = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>
           {editMode ? "Update Manage Snap Block" : "Add Snap Block"}
         </DialogTitle>

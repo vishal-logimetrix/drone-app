@@ -19,16 +19,19 @@ const Dashboard = () => {
         userName: "Mohit Kumar",
         userId: "ACME002",
         timestamp: "2024-09-26T15:21:32",
+        loginBy: 'Login by feild User'
       },
       {
         userName: "Mohit Kumar",
         userId: "ACME002",
         timestamp: "2024-09-26T11:51:49",
+        loginBy: 'Login by Block User'
       },
       {
         userName: "Mohit Kumar",
         userId: "ACME002",
         timestamp: "2024-09-26T08:52:35",
+        loginBy: 'Login by Admin'
       },
     ];
 
@@ -267,7 +270,7 @@ const Dashboard = () => {
               }} >
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <MdPerson style={{ fontSize: "20px", color: "#8c8c8c" }} />
-                <span>Login by field user</span>
+                <span>{ notification.loginBy}</span>
               </div>
               <Badge className={styles['custom-badge']} >
                 {notification.userName}-{notification.userId}{" "}

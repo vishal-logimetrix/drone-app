@@ -192,10 +192,7 @@ const ManageProjects = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth >
         <DialogTitle>{editMode ? 'Update Project' : 'Add Project'}</DialogTitle>
         <DialogContent>
           <DialogContentText>

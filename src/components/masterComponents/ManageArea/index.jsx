@@ -203,10 +203,7 @@ const ManageArea = () => {
       />
 
       {/* Dialog for Add/Edit User Role */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth >
         <DialogTitle>{editMode ? 'Update Area' : 'Add Area'}</DialogTitle>
         <DialogContent>
           <DialogContentText>

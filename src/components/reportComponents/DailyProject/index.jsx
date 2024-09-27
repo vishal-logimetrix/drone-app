@@ -3,13 +3,9 @@ import { Table, Row, Col, Dropdown, DropdownButton  } from "react-bootstrap";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Alert, Grid } from '@mui/material';
 import ReactPaginate from "react-paginate";
 import { FaBars } from "react-icons/fa";
-
-
-
 import styles from "./dailyProject.module.css";
 
 const DailyProject = () => {
-
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -30,8 +26,6 @@ const DailyProject = () => {
   const [longitude, setLongitude] = useState(""); 
   const [address, setSetAddress] = useState(""); 
   const [image, setSetImage] = useState(null);
-
-
 
   const ProjectSites = [
     {
@@ -258,7 +252,7 @@ const DailyProject = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button"
+      <div className={styles["button"]}
         style={{
           textAlign: "flex-start",
           marginBottom: "5px",

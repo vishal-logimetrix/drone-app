@@ -1,4 +1,11 @@
 
+
+.button{
+  border: 1px solid #5bc0de;
+  padding: 10px 0;
+  margin: 0 !important;
+}
+
 .form-control{
     margin-left: 5px !important;
 }
@@ -44,8 +51,8 @@
     padding: 0;
     height: 200px; 
     overflow-y: auto;
-    border-right: 1px solid #0056b3;
-    border-left: 1px solid #5bc0de;
+    border-right: 1px solid #5bc0de !important;
+    border-left: 1px solid #5bc0de !important;
     border-color: #e2e2e2;
   }
   
