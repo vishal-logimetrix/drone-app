@@ -11,6 +11,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import axios from 'axios';
 
 import styles from "./managUser.module.css";
 
@@ -190,27 +191,62 @@ const ManageUser = () => {
     setUserName(role.Name);
     setOpenMapUser(true)
   } 
+
   const handleClickMapUserClose = ()=>{
     setSelectedOptions([]);
     setOpenMapUser(false)
   }
+  
   const handleClickMapUserSave = ()=>{
     console.log('Selected options:', selectedOptions);
     setOpenMapUser(false)
   }
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    console.log("Submitting User Data:", {
-      newUserRole,
-      newUserName,
-      newUserEmail,
-      newUserMobile,
-      newUserAddress,
-      selectedDrone,
-    });
-    handleClose();
+  
+    // Prepare user data object
+    const userData = {
+      role: newUserRole,
+      name: newUserName,
+      email: newUserEmail,
+      mobile: newUserMobile,
+      address: newUserAddress,
+      drone: selectedDrone,
+    };
+  
+    try {
+      if (editMode) {
+        // Call the API to edit user
+        const response = await axios.put(`/api/users/${currentRoleId}`, userData);
+        
+        if (response.status === 200) {
+          console.log('User edited successfully');
+          // Handle success (e.g., update UI, show success message)
+        } else {
+          console.error('Failed to edit user');
+          // Handle error (e.g., show error message)
+        }
+      } else {
+        // Call the API to add new user
+        const response = await axios.post('/api/users', userData);
+  
+        if (response.status === 201) {
+          console.log('User added successfully');
+          // Handle success (e.g., update UI, show success message)
+        } else {
+          console.error('Failed to add user');
+          // Handle error (e.g., show error message)
+        }
+      }
+  
+      handleClose(); // Close the dialog
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle any errors (e.g., show error message)
+    }
   };
+  
 
   return (
     <div className={styles["user-role-table"]}>
@@ -323,7 +359,6 @@ const ManageUser = () => {
         <DialogContentText className="mb-3">
             {editMode ? 'Update the user details below.' : 'To add a user, please enter the details.'}
           </DialogContentText>
-
           <form onSubmit={submitForm}>
             {/* Name, Email */}
             <div className={styles["form-row"]}>
@@ -401,16 +436,10 @@ const ManageUser = () => {
             </DialogActions> 
       </Dialog>
 
-
       <Dialog open={openMapUser} maxWidth="sm" fullWidth>
       <DialogTitle>Map {userName} with project</DialogTitle>
       <DialogContent>
-        <Select
-          value={selectedOptions}
-          onChange={handleChange}
-          options={options}
-          isMulti
-          menuPortalTarget={document.body}  
+        <Select value={selectedOptions} onChange={handleChange} options={options} isMulti menuPortalTarget={document.body}  
           menuPosition="fixed"  
           styles={{
             menuPortal: (base) => ({ ...base, zIndex: 9999 })  
@@ -422,8 +451,6 @@ const ManageUser = () => {
         <Button onClick={handleClickMapUserSave}>Save</Button>
       </DialogActions>
     </Dialog>
-
-
     </div>
   );
 };

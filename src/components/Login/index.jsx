@@ -1,121 +1,174 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
-import SnackbarContent from '@mui/material/SnackbarContent'; // Import SnackbarContent for custom styling
-//import axios from 'axios'; // Import Axios for HTTP requests
+import SnackbarContent from '@mui/material/SnackbarContent';
 import styles from "./login.module.css";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  // Snackbar state for managing notification
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
     horizontal: 'center',
   });
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
   const { vertical, horizontal, open } = state;
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log({email, password})
-    navigate('/dashboard')
-    try {
-      // Make the HTTP POST request to authenticate the user
-      // const response = await axios.post('https://your-api-url.com/auth/login', {
-      //   email,
-      //   password,
-      // });
-      
-      const response = await fetch('https://your-api-url.com/', {
-        email, password
-      })
-      // Assuming the API returns a token or some user data upon successful authentication
-      if (response.data.success) {
-        // You can save the token in localStorage or context if needed
-        // localStorage.setItem('token', response.data.token);
-        navigate('/dashboard'); // Navigate to the dashboard on successful login
-      } else {
-        // Handle error (e.g., show a snackbar with an error message)
-        handleClick({ vertical: 'top', horizontal: 'center' });
+  // State for form, errors, touched status, form validity, and login failure
+  const model = {
+    username: '',
+    password: ''
+  };
+
+  const errModel = {
+    username: null,
+    password: null
+  };
+
+  const touchedModel = {
+    username: false,
+    password: false
+  };
+
+  const [form, setForm] = useState(model);
+  const [formError, setFormError] = useState(errModel);
+  const [touched, setTouched] = useState(touchedModel);
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false); // Track login failure
+
+  // Validator function
+  const validator = (name, value) => {
+    let error = null;
+    if (name === "username") {
+      if (!value) {
+        error = "Username is required";
       }
-    } catch (error) {
-      // Handle the error (e.g., show a snackbar with an error message)
-      console.error('Login failed:', error);
-      handleClick({ vertical: 'top', horizontal: 'center' });
+    }
+    if (name === "password") {
+      if (!value) {
+        error = "Password is required";
+      } else if (value.length < 6) {
+        error = "Password must be at least 6 characters";
+      }
+    }
+
+    setFormError({
+      ...formError,
+      [name]: error
+    });
+  };
+
+  // Check form validity
+  useEffect(() => {
+    if (!formError.username && !formError.password && form.username && form.password) {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  }, [formError, form]);
+
+  // Handle input changes and validate
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value
+    });
+
+    // Only validate after the field is touched
+    if (touched[name]) {
+      validator(name, value);
     }
   };
 
-  const handleClick = (newState) => () => {
+  // Handle field blur (when user clicks out of the field)
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    // Mark the field as touched
+    setTouched({
+      ...touched,
+      [name]: true
+    });
+    validator(name, value);
+  };
+
+  // Handle form submission
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Final validation before submission
+    validator("username", form.username);
+    validator("password", form.password);
+    // Check if form is valid
+    if (formIsValid) {
+      console.log('Form Values:', form);
+      navigate('/dashboard');
+      // Simulate API call (you can replace this with real API call logic)
+      // if (form.username === "admin" && form.password === "password123") {
+        // Successful login simulation
+        // navigate('/dashboard');
+      // } else {
+        // Trigger login failure Snackbar
+        // setLoginFailed(true);
+        // handleClick({ vertical: 'top', horizontal: 'right' });
+      // }
+    } else {
+      console.log('Form has errors');
+    }
+  };
+
+  const handleClick = (newState) => {
     setState({ ...newState, open: true });
   };
 
   const handleClose = () => {
     setState({ ...state, open: false });
+    setLoginFailed(false); 
   };
-
-  const buttons = (
-    <React.Fragment>
-      <Grid item xs={6} sx={{ textAlign: 'right' }}>
-        <Button onClick={handleClick({ vertical: 'top', horizontal: 'right' })}>
-          Top-Right
-        </Button>
-      </Grid>
-    </React.Fragment>
-  );
 
   return (
     <>
       <div className={styles.parent}>
         <video src="/assets/Video/bgblue.m4v" autoPlay loop muted></video>
-
         <div className={styles.container}>
           <form onSubmit={handleLogin}>
             <img className={styles.logo} src="logo_acme.png" alt="ACME_LOGO" />
-
             <div className={styles.input_box}>
-              <input
-                type="email"
-                placeholder="Email"
-                name="username"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              <input type="text" placeholder="Username" name="username" value={form.username}
+                onChange={handleInputChange} onBlur={handleBlur} />
+              {touched.username && formError.username && (
+                <small className="text-danger" style={{ fontWeight: '800', fontSize: '12px' }}>
+                  {formError.username}
+                </small>
+              )}
             </div>
 
             <div className={styles.input_box}>
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+              <input type="password" placeholder="Password" name="password" value={form.password}
+                onChange={handleInputChange} onBlur={handleBlur}
               />
+              {touched.password && formError.password && (
+                <small className="text-danger" style={{ fontWeight: '800', fontSize: '12px' }}>
+                  {formError.password}
+                </small>
+              )}
             </div>
 
-            <button className={styles.btn} type="submit">Login</button>
-            <button className={styles.btn} onClick={handleClick({ vertical: 'top', horizontal: 'right' })}>Check notification</button>
+            <button className={formIsValid ? styles.btn : styles.disableBtn} type="submit" disabled={!formIsValid}>
+              Login
+            </button>
+
           </form>
         </div>
       </div>
 
       <Box sx={{ width: 500 }}>
-        {buttons}
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={open}
-          onClose={handleClose}
-          autoHideDuration={4000} 
-          key={vertical + horizontal}
-        >
-          <SnackbarContent 
-            message="Login failed. Please try again." // Customize your message based on success/failure
-            sx={{ backgroundColor: '#FF6347', color: '#fff', width: '150px', height: '60px' }} 
+        <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} onClose={handleClose}
+          autoHideDuration={4000} key={vertical + horizontal} >
+          <SnackbarContent message="Login failed. Please try again."
+            sx={{ backgroundColor: '#FF6347', color: '#fff', width: '200px', height: '60px' }}
           />
         </Snackbar>
       </Box>

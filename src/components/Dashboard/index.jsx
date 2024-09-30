@@ -45,7 +45,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container">
+    <div className="">
       <div className="row">
         <div className="col-12 col-md-3 mb-4">
           <Card style={{ width: "100%", borderRadius: 0, borderColor: "#5bc0de" }} >

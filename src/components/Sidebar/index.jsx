@@ -266,7 +266,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
         {/* Logout */}
         <li>
-          <NavLink to="/logout" className={styles.navLink}>
+          <NavLink to="/login" className={styles.navLink}>
             <FaPowerOff className={styles.icon} /> {/* Logout Icon */}
             {!isCollapsed && <span>Logout</span>}
           </NavLink>
