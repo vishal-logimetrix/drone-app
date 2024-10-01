@@ -4,12 +4,8 @@ import ReactPaginate from 'react-paginate';
 import Button from '@mui/material/Button';
 import { FaPlus, FaBars, FaEdit, FaTrash } from 'react-icons/fa'; 
 import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Alert from '@mui/material/Alert'; // Import Alert for displaying error messages
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Alert } from '@mui/material';
+// import Alert from '@mui/material/Alert'; 
 
 import styles from './ManageUserRole.module.css';
 
@@ -53,7 +49,7 @@ const ManageUserRole = () => {
     setNewRole('');
     setEditMode(false);
     setCurrentRoleId(null);
-    setError(''); // Reset error message on close
+    setError(''); 
   };
 
   const handleClickOpen = (role = null) => {

@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Row, Col, Dropdown, DropdownButton  } from "react-bootstrap";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Alert, Grid } from '@mui/material';
 import ReactPaginate from "react-paginate";
 import { FaBars } from "react-icons/fa";
-
-
+import ReactImageLightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 import styles from "./projectSites.module.css";
 
 const ProjectSites = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+
+ 
+  const [searchTerm, setSearchTerm] = useState("");  
+  
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
@@ -30,6 +33,23 @@ const ProjectSites = () => {
   const [address, setSetAddress] = useState(""); 
   const [image, setSetImage] = useState(null);
 
+  const [isOpen, setIsOpen] = useState(false); // Track if the lightbox is open
+  const [photoIndex, setPhotoIndex] = useState(0); // Track the current image index
+  const [images, setImages] = useState([]); // Array to store image URLs
+
+  useEffect(() => {
+    if (images.length > 0 && isOpen === false) {
+      setIsOpen(true); // Open the lightbox once images are set
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [images]);
+  
+    
+  const handleImageClick = (index) => {
+    const allImages = displayRoles.map((r) => r.siteImg);
+    setImages(allImages); // Set the images first
+    setPhotoIndex(index); // Set the clicked image as the starting index
+  };
 
 
   const ProjectSites = [
@@ -219,7 +239,6 @@ const ProjectSites = () => {
     setSetImage(site.siteImg);
     setOpen(true);
   };
-
 
 
   const handleClose = () => {
@@ -448,10 +467,17 @@ const ProjectSites = () => {
                 <td>{index + 1 + currentPage * itemsPerPage}</td>
                 <td>{role.rowId}</td>
                 <td>
-                    <img src={role.siteImg} alt="SiteImage" style={{
-                        width: '120px',
-                        height: '70px'
-                    }} />
+                <img
+                src={role.siteImg}
+                alt="SiteImage"
+                title="open in full screen"
+                style={{
+                  width: '120px',
+                  height: '70px',
+                  cursor: 'pointer'
+                }}
+                onClick={() => handleImageClick(index)}
+              />
                 </td>
                 <td>{role.siteLong}</td>
                 <td>{role.siteLat}</td>
@@ -480,6 +506,23 @@ const ProjectSites = () => {
           )}
         </tbody>
       </Table>
+
+      {isOpen && images.length > 0 && (
+      <ReactImageLightbox
+        mainSrc={images[photoIndex]} // Main image
+        nextSrc={images[(photoIndex + 1) % images.length]} // Next image
+        prevSrc={images[(photoIndex + images.length - 1) % images.length]} // Previous image
+        onCloseRequest={() => setIsOpen(false)} // Close lightbox
+        onMovePrevRequest={() =>
+          setPhotoIndex((photoIndex + images.length - 1) % images.length)
+        } // Previous image
+        onMoveNextRequest={() =>
+          setPhotoIndex((photoIndex + 1) % images.length)
+        } // Next image
+        />
+      )}
+
+      
 
       {/* Pagination */}
       <ReactPaginate

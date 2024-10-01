@@ -23,6 +23,7 @@ import PageNotFound from './components/PageNotFound';
 import UploadApk from './components/masterComponents/UploadAPK';
 import UploadKMZ from './components/masterComponents/UploadKMZ';
 import AllNotifications from './components/AllNotifications';
+import ProtectedRoute from './ProtectedRoute.js'
 // import React, { useState } from "react";
 
 function App() {
@@ -44,23 +45,24 @@ function App() {
                 <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Layout />} >
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="/allNotifications" element={<AllNotifications />} />
-                    <Route path="/manageUserRole" element={<ManageUserRole />} />
-                    <Route path="/manageUser" element={<ManageUser />} />
-                    <Route path="/manageProjects" element={<ManageProjects />} />
-                    <Route path="/activities" element={<ManageActivities />} />
-                    <Route path="/area" element={<ManageArea />} />
-                    <Route path="/subarea" element={<ManageSubArea />} />
-                    <Route path="/manageSnapBlock" element={<ManageSnapBlock />} />
-                    <Route path="/uploadAPK" element={<UploadApk />} />
-                    <Route path="/uploadKMZ" element={<UploadKMZ />} />
-                    <Route path="/projectSites" element={<ProjectSites />} />
-                    <Route path="/geoMapping" element={<GeoMapping />} />
-                    <Route path="/dayWise" element={<DayWiseProject />} />
-                    <Route path="/dailyProjects" element={<DailyProject />} />
-                    <Route path="/processedImages" element={<ProcessedImage />} />
-                    <Route path="/userReport" element={<UserReport />} />
+
+                <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> } />
+                <Route path="/allNotifications" element={ <ProtectedRoute> <AllNotifications /> </ProtectedRoute> } />
+                <Route path="/manageUserRole" element={ <ProtectedRoute> <ManageUserRole /> </ProtectedRoute> } />
+                <Route path="/manageUser" element={ <ProtectedRoute> <ManageUser /> </ProtectedRoute> } />
+                <Route path="/manageProjects" element={ <ProtectedRoute> <ManageProjects /> </ProtectedRoute> } />
+                <Route path="/activities" element={ <ProtectedRoute> <ManageActivities /> </ProtectedRoute> } />
+                <Route path="/area" element={ <ProtectedRoute> <ManageArea /> </ProtectedRoute> } />
+                <Route path="/subarea" element={ <ProtectedRoute> <ManageSubArea /> </ProtectedRoute> } />
+                <Route path="/manageSnapBlock" element={ <ProtectedRoute> <ManageSnapBlock /> </ProtectedRoute> } />
+                <Route path="/uploadAPK" element={ <ProtectedRoute> <UploadApk /> </ProtectedRoute> } />
+                <Route path="/uploadKMZ" element={ <ProtectedRoute> <UploadKMZ /> </ProtectedRoute> } />
+                <Route path="/projectSites" element={ <ProtectedRoute> <ProjectSites /> </ProtectedRoute> } />
+                <Route path="/geoMapping" element={ <ProtectedRoute> <GeoMapping /> </ProtectedRoute> } />
+                <Route path="/dayWise" element={ <ProtectedRoute> <DayWiseProject /> </ProtectedRoute> } />
+                <Route path="/dailyProjects" element={ <ProtectedRoute> <DailyProject /> </ProtectedRoute> } />
+                <Route path="/processedImages" element={ <ProtectedRoute> <ProcessedImage /> </ProtectedRoute> } />
+                <Route path="/userReport" element={ <ProtectedRoute> <UserReport /> </ProtectedRoute> } />
                 </Route>
                 <Route path="*" element={<PageNotFound />} />
             </Routes>

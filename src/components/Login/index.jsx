@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Snackbar from '@mui/material/Snackbar';
-import SnackbarContent from '@mui/material/SnackbarContent';
+import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContent from "@mui/material/SnackbarContent";
 import styles from "./login.module.css";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,26 +12,26 @@ const Login = () => {
   // Snackbar state for managing notification
   const [state, setState] = useState({
     open: false,
-    vertical: 'top',
-    horizontal: 'center',
+    vertical: "top",
+    horizontal: "center",
   });
 
   const { vertical, horizontal, open } = state;
 
   // State for form, errors, touched status, form validity, and login failure
   const model = {
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   };
 
   const errModel = {
     username: null,
-    password: null
+    password: null,
   };
 
   const touchedModel = {
     username: false,
-    password: false
+    password: false,
   };
 
   const [form, setForm] = useState(model);
@@ -38,6 +39,7 @@ const Login = () => {
   const [touched, setTouched] = useState(touchedModel);
   const [formIsValid, setFormIsValid] = useState(false);
   const [loginFailed, setLoginFailed] = useState(false); // Track login failure
+  const [showPassword, setShowPassword] = useState(false);
 
   // Validator function
   const validator = (name, value) => {
@@ -57,13 +59,19 @@ const Login = () => {
 
     setFormError({
       ...formError,
-      [name]: error
+      [name]: error,
     });
   };
 
   // Check form validity
   useEffect(() => {
-    if (!formError.username && !formError.password && form.username && form.password) {
+    localStorage.clear();
+    if (
+      !formError.username &&
+      !formError.password &&
+      form.username &&
+      form.password
+    ) {
       setFormIsValid(true);
     } else {
       setFormIsValid(false);
@@ -75,7 +83,7 @@ const Login = () => {
     const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: value
+      [name]: value,
     });
 
     // Only validate after the field is touched
@@ -87,10 +95,9 @@ const Login = () => {
   // Handle field blur (when user clicks out of the field)
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    // Mark the field as touched
     setTouched({
       ...touched,
-      [name]: true
+      [name]: true,
     });
     validator(name, value);
   };
@@ -102,30 +109,43 @@ const Login = () => {
     validator("username", form.username);
     validator("password", form.password);
     // Check if form is valid
+
     if (formIsValid) {
-      console.log('Form Values:', form);
-      navigate('/dashboard');
+      console.log("Form Values:", form);
+      const isAuthenticated = true;
+      if (isAuthenticated) {
+        localStorage.setItem("user", JSON.stringify({ isLoggedIn: true }));
+        navigate("/dashboard"); // Redirect after login
+      } else {
+        alert("Login failed");
+      }
+
       // Simulate API call (you can replace this with real API call logic)
       // if (form.username === "admin" && form.password === "password123") {
-        // Successful login simulation
-        // navigate('/dashboard');
+      // Successful login simulation
+      // navigate('/dashboard');
       // } else {
-        // Trigger login failure Snackbar
-        // setLoginFailed(true);
-        // handleClick({ vertical: 'top', horizontal: 'right' });
+      // Trigger login failure Snackbar
+      // setLoginFailed(true);
+      // handleClick({ vertical: 'top', horizontal: 'right' });
       // }
     } else {
-      console.log('Form has errors');
+      console.log("Form has errors");
     }
   };
 
   const handleClick = (newState) => {
+    //to open the login error notification
     setState({ ...newState, open: true });
   };
 
   const handleClose = () => {
     setState({ ...state, open: false });
-    setLoginFailed(false); 
+    setLoginFailed(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -136,39 +156,64 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <img className={styles.logo} src="logo_acme.png" alt="ACME_LOGO" />
             <div className={styles.input_box}>
-              <input type="text" placeholder="Username" name="username" value={form.username}
-                onChange={handleInputChange} onBlur={handleBlur} />
+              <input type="text" placeholder="Username" name="username" value={form.username} onChange={handleInputChange}
+                onBlur={handleBlur} />
               {touched.username && formError.username && (
-                <small className="text-danger" style={{ fontWeight: '800', fontSize: '12px' }}>
+                <small className="text-danger" style={{ fontWeight: "800", fontSize: "12px" }} >
                   {formError.username}
-                </small>
-              )}
+                </small> )}
             </div>
 
-            <div className={styles.input_box}>
-              <input type="password" placeholder="Password" name="password" value={form.password}
+            <div className={styles.input_box} style={{ position: "relative" }}>
+              <input type={showPassword ? "text" : "password"} placeholder="Password" name="password" value={form.password}
                 onChange={handleInputChange} onBlur={handleBlur}
+                style={{
+                  paddingRight: "40px", // Add padding to prevent text overlap with the icon
+                  height: "40px", // Set a consistent height for the input
+                  borderRadius: "4px", // Optional: Add border-radius for better appearance
+                  border: "1px solid #ccc", // Optional: Add border for better appearance
+                }}
               />
+              <button type="button" onClick={togglePasswordVisibility}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  color: "#FFFFFF",
+                }} >
+                {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+              </button>
               {touched.password && formError.password && (
-                <small className="text-danger" style={{ fontWeight: '800', fontSize: '12px' }}>
+                <small className="text-danger" style={{ fontWeight: "800", fontSize: "12px" }} >
                   {formError.password}
                 </small>
               )}
             </div>
 
-            <button className={formIsValid ? styles.btn : styles.disableBtn} type="submit" disabled={!formIsValid}>
+            <button className={formIsValid ? styles.btn : styles.disableBtn} type="submit" disabled={!formIsValid} >
               Login
             </button>
-
           </form>
         </div>
       </div>
 
       <Box sx={{ width: 500 }}>
-        <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} onClose={handleClose}
-          autoHideDuration={4000} key={vertical + horizontal} >
+        <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} onClose={handleClose} autoHideDuration={4000}
+          key={vertical + horizontal} >
           <SnackbarContent message="Login failed. Please try again."
-            sx={{ backgroundColor: '#FF6347', color: '#fff', width: '200px', height: '60px' }}
+            sx={{
+              backgroundColor: "#FF6347",
+              color: "#fff",
+              width: "200px",
+              height: "60px",
+            }}
           />
         </Snackbar>
       </Box>
