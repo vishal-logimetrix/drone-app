@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Dropdown, DropdownButton  } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import {  Button, TextField} from '@mui/material';
 import { FaBars } from "react-icons/fa";
 
@@ -49,14 +49,15 @@ const DayWiseProject = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button"
-        style={{
+      <div className="button" style={{
           textAlign: "flex-start",
           marginBottom: "5px",
           display: "flex",
           gap: "10px",
         }} >
-        <form >
+
+        <form style={{display: 'flex'}}>
+
           <TextField label="select date" type="date" value={fromDate} onChange={handleFromDateChange} required id="date"
             variant="outlined" className={styles["form-control"]}
             sx={{
@@ -70,7 +71,6 @@ const DayWiseProject = () => {
                 height: "40px",
               },
             }} />
-
 
           <TextField select variant="outlined" className={styles["form-control"]} value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
@@ -95,8 +95,6 @@ const DayWiseProject = () => {
               </option>
             ))}
           </TextField>
-
-
 
           <TextField select variant="outlined" className={styles["form-control"]} value={selectedArea}
             onChange={(e) => setSelectedArea(e.target.value)}
@@ -123,7 +121,6 @@ const DayWiseProject = () => {
           </TextField>
 
           <TextField select variant="outlined" className={styles["form-control"]}
-            
             SelectProps={{
               native: true,
             }}
@@ -135,12 +132,10 @@ const DayWiseProject = () => {
                 height: "40px",
               },
             }} >
-
             <option value="" disabled defaultValue> Select Days </option>
             <option value="3"> 3 </option>
             <option value="6"> 6 </option>
             <option value="8"> 9 </option>
-           
           </TextField>
 
           <Button variant="contained" className={styles["form-control"]} style={{ textAlign: "center" }} onClick={handleSubmit} >

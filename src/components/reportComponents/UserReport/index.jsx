@@ -38,21 +38,15 @@ const UserReport = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <div
-        className="button"
+      <div className="button"
         style={{
           textAlign: "flex-start",
           marginBottom: "5px",
           display: "flex",
           gap: "10px",
-        }}
-      >
-        <form>
-          <TextField
-            select
-            variant="outlined"
-            className={styles["form-control"]}
-            value={selectedProject}
+        }} >
+        <form style={{display: 'flex'}} >
+          <TextField select variant="outlined" className={styles["form-control"]} value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
             SelectProps={{
               native: true,
@@ -64,8 +58,8 @@ const UserReport = () => {
               style: {
                 height: "40px",
               },
-            }}
-          >
+            }} >
+
             {/* Default placeholder option */}
             <option value="" disabled defaultValue>
               Select a project
@@ -77,11 +71,7 @@ const UserReport = () => {
             ))}
           </TextField>
 
-          <TextField
-            select
-            variant="outlined"
-            className={styles["form-control"]}
-            value={selectedUsers}
+          <TextField select variant="outlined" className={styles["form-control"]} value={selectedUsers}
             onChange={(e) => setSelectedUsers(e.target.value)}
             SelectProps={{
               native: true,
@@ -107,9 +97,7 @@ const UserReport = () => {
           </TextField>
 
           {/* Button is disabled if both dropdowns are not selected */}
-          <Button
-            variant="contained"
-            className={styles["form-control"]}
+          <Button variant="contained" className={styles["form-control"]}
             style={{ textAlign: "center" }}
             onClick={handleSubmit}
             disabled={isButtonDisabled} >

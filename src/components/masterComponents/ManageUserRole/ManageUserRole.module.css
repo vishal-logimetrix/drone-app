@@ -20,6 +20,7 @@
   .table-title{
     padding-top: 8px;
     color: #fff;
+    /* height: 40px; */
   }
 
   .tableHeader{
@@ -28,6 +29,7 @@
     margin: 0;
     padding: 0;
     background-color: #5bc0de;
+    height: 40px;
   }
 
   

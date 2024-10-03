@@ -16,8 +16,7 @@ const DailyProject = () => {
   const [selectedSubArea, setSelectedSubArea] = useState("");
   const [selectedProject, setSelectedProject] = useState("");
   const [selectedActivity, setSelectedActivity] = useState("");
-  const [fromDate, setFromDate] = useState(""); // State for 'From' date
-  const [toDate, setToDate] = useState("");
+
 
   const [projectName, setProjectName] = useState(""); 
   const [activityName, setActivityName] = useState(""); 
@@ -215,8 +214,6 @@ const DailyProject = () => {
     setOpen(true);
   };
 
-
-
   const handleClose = () => {
     setOpen(false);
     setProjectName('');
@@ -229,18 +226,8 @@ const DailyProject = () => {
     setError("");  
   };
 
-//   const handleFromDateChange = (e) => {
-//     setFromDate(e.target.value);
-//   };
-
-//   const handleToDateChange = (e) => {
-//     setToDate(e.target.value);
-//   };
-
   const handleSubmit = () => {
     const searchData = {
-      fromDate,
-      toDate,
       selectedProject,
       selectedActivity,
       selectedArea,
@@ -259,38 +246,7 @@ const DailyProject = () => {
           display: "flex",
           gap: "10px",
         }} >
-        <form >
-          {/* <TextField label="From Date" type="date" value={fromDate} onChange={handleFromDateChange} required id="from-date"
-            variant="outlined" className={styles["form-control"]}
-            sx={{
-              height: "40px",
-            }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              style: {
-                height: "40px",
-              },
-            }} /> */}
-
-          {/* To Date Picker */}
-          {/* <TextField label="To Date" type="date" value={toDate} onChange={handleToDateChange} required id="to-date"
-            variant="outlined" className={styles["form-control"]}
-            sx={{
-              height: "40px",
-            }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              style: {
-                height: "40px",
-              },
-            }}
-            inputProps={{
-              min: fromDate, 
-            }} /> */}
+        <form style={{display: 'flex'}}>
 
           <TextField select variant="outlined" className={styles["form-control"]} value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
@@ -498,8 +454,7 @@ const DailyProject = () => {
         nextLinkClassName={`page-link ${styles["prev-next-button"]}`}
         breakClassName={"page-item"}
         breakLinkClassName={"page-link"}
-        activeClassName={"active"}
-      />
+        activeClassName={"active"} />
 
       {/* Dialog for Add/Edit User Role */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
@@ -507,19 +462,12 @@ const DailyProject = () => {
        Site Details
       </DialogTitle>
       <DialogContent>
-    
         {/* Grid for Layout */}
         <Grid container spacing={2}>
           {/* Left side: Image Details */}
-
           <Grid item xs={6}>
-            <img 
-              src={ image } 
-              alt="Site View"
-              style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-            />
+            <img  src={ image }  alt="Site View" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
           </Grid>
-
           <Grid item xs={6}>
             {error && <Alert severity="error">{error}</Alert>}{" "}
             {/* Display error message */}
@@ -534,7 +482,6 @@ const DailyProject = () => {
               <p><strong>Address:</strong> { address }</p>
             </div>
           </Grid>
-          
         </Grid>
       </DialogContent>
       <DialogActions>

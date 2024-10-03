@@ -266,7 +266,8 @@ const GeoMapping = () => {
           display: "flex",
           gap: "10px",
         }} >
-        <form >
+        <form style={{display: 'flex'}}> 
+          
           <TextField label="select date" type="date" value={fromDate} onChange={handleFromDateChange} required id="date"
             variant="outlined" className={styles["form-control"]}
             sx={{

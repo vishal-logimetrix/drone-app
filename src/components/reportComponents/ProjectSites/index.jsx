@@ -283,7 +283,8 @@ const ProjectSites = () => {
           display: "flex",
           gap: "10px",
         }} >
-        <form >
+        <form style={{display: 'flex'}}>
+
           <TextField label="From Date" type="date" value={fromDate} onChange={handleFromDateChange} required id="from-date"
             variant="outlined" className={styles["form-control"]}
             sx={{
@@ -415,11 +416,13 @@ const ProjectSites = () => {
           <Button variant="contained" className={styles["form-control"]} style={{ textAlign: "center" }} onClick={handleSubmit} >
             Search
           </Button>
+
         </form>
       </div>
 
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
-        <Col xs={12} md={6} className="d-flex align-items-center">
+
+        <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '40px'}}>
           <p className={styles["table-title"]}>
             <span className="mr-2">
               <FaBars style={{ marginRight: "10px", fontWeight: 900 }} />
@@ -427,8 +430,9 @@ const ProjectSites = () => {
             View Project Site
           </p>
         </Col>
-        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
-          <div className="d-flex align-items-center" style={{ height: "40px" }}>
+
+        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" style={{height: '40px'}}>
+          <div className="d-flex align-items-center" style={{ height: "30px" }}>
             <span className="mr-2" style={{ color: "white" }}>
               Per page: &nbsp;
             </span>
@@ -440,6 +444,7 @@ const ProjectSites = () => {
             </DropdownButton>
           </div>
         </Col>
+        
       </Row>
 
       {/* Table */}
@@ -467,17 +472,13 @@ const ProjectSites = () => {
                 <td>{index + 1 + currentPage * itemsPerPage}</td>
                 <td>{role.rowId}</td>
                 <td>
-                <img
-                src={role.siteImg}
-                alt="SiteImage"
-                title="open in full screen"
+                <img src={role.siteImg} alt="SiteImage" title="open in full screen"
                 style={{
-                  width: '120px',
-                  height: '70px',
+                  width: '110px',
+                  height: '65px',
                   cursor: 'pointer'
                 }}
-                onClick={() => handleImageClick(index)}
-              />
+                onClick={() => handleImageClick(index)} />
                 </td>
                 <td>{role.siteLong}</td>
                 <td>{role.siteLat}</td>
@@ -494,8 +495,7 @@ const ProjectSites = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="12" className="notFound"
-                style={{
+              <td colSpan="12" className="notFound" style={{
                   color: "orangered",
                   textAlign: "center",
                   fontWeight: "bold",
@@ -508,8 +508,7 @@ const ProjectSites = () => {
       </Table>
 
       {isOpen && images.length > 0 && (
-      <ReactImageLightbox
-        mainSrc={images[photoIndex]} // Main image
+      <ReactImageLightbox  mainSrc={images[photoIndex]} // Main image
         nextSrc={images[(photoIndex + 1) % images.length]} // Next image
         prevSrc={images[(photoIndex + images.length - 1) % images.length]} // Previous image
         onCloseRequest={() => setIsOpen(false)} // Close lightbox
@@ -521,8 +520,6 @@ const ProjectSites = () => {
         } // Next image
         />
       )}
-
-      
 
       {/* Pagination */}
       <ReactPaginate
@@ -542,26 +539,19 @@ const ProjectSites = () => {
         nextLinkClassName={`page-link ${styles["prev-next-button"]}`}
         breakClassName={"page-item"}
         breakLinkClassName={"page-link"}
-        activeClassName={"active"}
-      />
+        activeClassName={"active"} />
 
       {/* Dialog for Add/Edit User Role */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-      <DialogTitle>
-       Site Details
-      </DialogTitle>
+        <DialogTitle>
+           Site Details
+        </DialogTitle>
       <DialogContent>
-    
         {/* Grid for Layout */}
         <Grid container spacing={2}>
           {/* Left side: Image Details */}
-
           <Grid item xs={6}>
-            <img 
-              src={ image } 
-              alt="Site View"
-              style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-            />
+            <img  src={ image }  alt="Site View" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
           </Grid>
 
           <Grid item xs={6}>

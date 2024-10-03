@@ -6,7 +6,7 @@
 
 .button{
   border: 1px solid #5bc0de;
-  padding: 10px 0;
+  padding: 10px 0 5px 0;
   margin: 0 !important;
 }
 
@@ -34,6 +34,7 @@
   .table-title{
     padding-top: 8px;
     color: #fff;
+    height: 30px;
   }
 
   .tableHeader{
@@ -42,6 +43,7 @@
     margin: 0;
     padding: 0;
     background-color: #5bc0de;
+    height: 40px;
   }
 
   
@@ -170,6 +172,7 @@
 
   .custom-dropdown-button.dropdown-toggle {
     border: none !important;
+   
 }
 
 .custom-dropdown-button {
@@ -177,4 +180,5 @@
     background-color: white;
     border-radius: 0;
     box-shadow: none !important; 
+    height: 30px !important;
 }
