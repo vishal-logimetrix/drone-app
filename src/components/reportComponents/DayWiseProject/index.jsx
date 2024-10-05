@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
 import {  Button, TextField} from '@mui/material';
-import { FaBars } from "react-icons/fa";
+// import { Row, Col } from "react-bootstrap";
+// import { FaBars } from "react-icons/fa";
 
 import styles from "./dayWiseProject.module.css";
 
@@ -13,7 +13,7 @@ const DayWiseProject = () => {
   const [selectedActivity, setSelectedActivity] = useState("");
   const [fromDate, setFromDate] = useState("");  
   const [toDate, setToDate] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  // const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const projects = [
     { projectId: 1, projectName: "KREDL-Guledgudda" },
@@ -143,7 +143,8 @@ const DayWiseProject = () => {
           </Button>
         </form>
       </div>
-      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
+      
+      {/* <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
         <Col xs={12} md={6} className="d-flex align-items-center">
           <p className={styles["table-title"]}>
             <span className="mr-2">
@@ -152,7 +153,7 @@ const DayWiseProject = () => {
             View Project Site
           </p>
         </Col>
-        {/* <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
+        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
           <div className="d-flex align-items-center" style={{ height: "40px" }}>
             <span className="mr-2" style={{ color: "white" }}>
               Per page: &nbsp;
@@ -164,8 +165,8 @@ const DayWiseProject = () => {
               <Dropdown.Item eventKey="15">15</Dropdown.Item>
             </DropdownButton>
           </div>
-        </Col> */}
-      </Row>
+        </Col>
+      </Row> */}
 
     </div>
   );

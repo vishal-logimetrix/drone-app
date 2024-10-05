@@ -174,3 +174,7 @@
     border-radius: 0;
     box-shadow: none !important; 
 }
+
+.geomap{
+  /* border: 1px solid red; */
+}
