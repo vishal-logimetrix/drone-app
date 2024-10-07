@@ -355,7 +355,7 @@ const DailyProject = () => {
       </div>
 
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
-        <Col xs={12} md={6} className="d-flex align-items-center">
+        <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '30px'}}>
           <p className={styles["table-title"]}>
             <span className="mr-2">
               <FaBars style={{ marginRight: "10px", fontWeight: 900 }} />
@@ -363,8 +363,8 @@ const DailyProject = () => {
             Daily Project Site
           </p>
         </Col>
-        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
-          <div className="d-flex align-items-center" style={{ height: "40px" }}>
+        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" style={{height: '30px'}}>
+          <div className="d-flex align-items-center" >
             <span className="mr-2" style={{ color: "white" }}>
               Per page: &nbsp;
             </span>

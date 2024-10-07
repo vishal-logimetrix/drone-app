@@ -262,7 +262,7 @@ const ManageUser = () => {
         </Button>
       </div>
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
-        <Col xs={12} md={6} className="d-flex align-items-center">
+        <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '30px'}}>
           <p className={styles["table-title"]}>
             <span className="mr-2">
               <FaBars style={{ marginRight: "10px", color: '#fff' }} />
@@ -271,7 +271,7 @@ const ManageUser = () => {
           </p>
         </Col>
         <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
-          <div className="d-flex align-items-center" style={{ height: "40px" }}>
+          <div className="d-flex align-items-center" style={{ height: "30px" }}>
             <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
             <DropdownButton title={itemsPerPage} onSelect={(value) => setItemsPerPage(Number(value))}
               variant="transparent" className={`${styles["custom-dropdown-button"]}`} >
@@ -281,7 +281,7 @@ const ManageUser = () => {
             </DropdownButton>
           </div>
           <InputGroup className={`${styles["search-bar"]}`}>
-            <FormControl  placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
+            <FormControl  placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} style={{ height: "30px" }} />
           </InputGroup>
         </Col>
       </Row>

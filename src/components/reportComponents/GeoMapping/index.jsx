@@ -115,7 +115,7 @@ const GeoMapping = () => {
       {/* Simple embedded Google Map */}
       <div id="geomap" className={styles["geomap"]} style={{ height: '400px', width: '100%' }}>
         <iframe
-          src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10000!2d${selectedSubArea.longitude}!3d${selectedSubArea.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1727956070961!5m2!1sen!2sin`}
+           src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10000!2d${selectedSubArea.longitude}!3d${selectedSubArea.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin&layer=c`}
           style={{ border: 0, width: '100%', height: '100%' }}
           allowFullScreen=""
           loading="lazy"
@@ -123,6 +123,7 @@ const GeoMapping = () => {
           title={selectedSubArea.subAreaName}
         />
       </div>
+
     </div>
   );
 };
