@@ -24,6 +24,7 @@ import UploadApk from './components/masterComponents/UploadAPK';
 import UploadKMZ from './components/masterComponents/UploadKMZ';
 import AllNotifications from './components/AllNotifications';
 import ProtectedRoute from './ProtectedRoute.js'
+import ViewMap from './components/masterComponents/ViewMap';
 // import React, { useState } from "react";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/manageSnapBlock" element={ <ProtectedRoute> <ManageSnapBlock /> </ProtectedRoute> } />
                 <Route path="/uploadAPK" element={ <ProtectedRoute> <UploadApk /> </ProtectedRoute> } />
                 <Route path="/uploadKMZ" element={ <ProtectedRoute> <UploadKMZ /> </ProtectedRoute> } />
+                <Route path="/viewMap" element={ <ProtectedRoute> <ViewMap /> </ProtectedRoute> } />
                 <Route path="/projectSites" element={ <ProtectedRoute> <ProjectSites /> </ProtectedRoute> } />
                 <Route path="/geoMapping" element={ <ProtectedRoute> <GeoMapping /> </ProtectedRoute> } />
                 <Route path="/dayWise" element={ <ProtectedRoute> <DayWiseProject /> </ProtectedRoute> } />

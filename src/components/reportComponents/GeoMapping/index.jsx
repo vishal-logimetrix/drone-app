@@ -4,7 +4,6 @@ import styles from "./geoMapping.module.css";
 
 const GeoMapping = () => {
   const [selectedArea, setSelectedArea] = useState("");
-  // const [selectedSubArea, setSelectedSubArea] = useState("");
   const [selectedProject, setSelectedProject] = useState("");
   const [selectedActivity, setSelectedActivity] = useState("");
   const [fromDate, setFromDate] = useState("");  
@@ -94,10 +93,8 @@ const GeoMapping = () => {
             ))}
           </TextField>
 
-           <TextField select variant="outlined" className={styles["form-control"]}
-            value={selectedSubArea.subAreaId} onChange={handleSubAreaChange} 
-            SelectProps={{ native: true }}
-            InputProps={{ style: { height: "40px" } }}>
+          <TextField select variant="outlined" className={styles["form-control"]} value={selectedSubArea.subAreaId} 
+            onChange={handleSubAreaChange} SelectProps={{ native: true }} InputProps={{ style: { height: "40px" } }}>
             <option value="" disabled>Select SubArea</option>
             {subAreas.map((subArea) => (
               <option key={subArea.subAreaId} value={subArea.subAreaId}>
@@ -106,16 +103,16 @@ const GeoMapping = () => {
             ))}
           </TextField>
 
-          <Button variant="contained" className={styles["form-control"]} style={{ textAlign: "center" }} onClick={() => {}}>
+          <Button variant="contained" className={styles["form-control"]} style={{ textAlign: "center" }} onClick={handleSubmit}>
             Search
           </Button>
         </form>
       </div>
 
-      {/* Simple embedded Google Map */}
+      {/* Embedded Google Map in satellite view */}
       <div id="geomap" className={styles["geomap"]} style={{ height: '400px', width: '100%' }}>
         <iframe
-           src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10000!2d${selectedSubArea.longitude}!3d${selectedSubArea.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin&layer=c`}
+          src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10000!2d${selectedSubArea.longitude}!3d${selectedSubArea.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin&maptype=satellite&layer=c`}
           style={{ border: 0, width: '100%', height: '100%' }}
           allowFullScreen=""
           loading="lazy"

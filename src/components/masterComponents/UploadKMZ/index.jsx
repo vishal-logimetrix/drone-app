@@ -4,12 +4,7 @@ import ReactPaginate from "react-paginate";
 import Button from "@mui/material/Button";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Alert from "@mui/material/Alert"; // Import Alert for displaying error messages
+import { useNavigate } from 'react-router-dom';
 
 import styles from "./uploadkmz.module.css";
 
@@ -17,11 +12,6 @@ const UploadKMZ = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [open, setOpen] = useState(false);
-  const [newRole, setNewRole] = useState("");
-  const [editMode, setEditMode] = useState(false);
-  const [currentRoleId, setCurrentRoleId] = useState(null);
-  const [error, setError] = useState(""); // State to manage error message
   const [selectedDrone, setSelectedDrone] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -37,6 +27,8 @@ const UploadKMZ = () => {
     role.project.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const navigate = useNavigate();
+
   const pageCount = Math.ceil(filteredRoles.length / itemsPerPage);
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -46,46 +38,6 @@ const UploadKMZ = () => {
     currentPage * itemsPerPage,
     currentPage * itemsPerPage + itemsPerPage
   );
-
-  const handleClose = () => {
-    setOpen(false);
-    setNewRole("");
-    setEditMode(false);
-    setCurrentRoleId(null);
-    setError(""); // Reset error message on close
-  };
-
-//   const handleClickOpen = (role = null) => {
-//     if (role) {
-//       setEditMode(true);
-//       setNewRole(role.project);
-//       setCurrentRoleId(role.id);
-//     } else {
-//       setEditMode(false);
-//       setNewRole("");
-//     }
-//     setOpen(true);
-//   };
-
-  const submitForm = (event) => {
-    event.preventDefault();
-
-    if (newRole.trim() === "") {
-      setError("Manage Snap name is required."); // Set error message if input is empty
-      return; // Stop the form submission
-    }
-
-    if (editMode) {
-      console.log(
-        `Updating manage snap ID: ${currentRoleId} to new name: ${newRole}`
-      );
-    } else {
-      console.log("Adding new manage snap:", newRole);
-    }
-
-    handleClose();
-  };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,6 +58,10 @@ const UploadKMZ = () => {
     // You can now send these values to a backend or use them as needed
   };
 
+  const handleLocationClick = (role) => {
+    navigate(`/viewMap`);
+    // navigate(`/viewMap/${role.id}`, { state: { role } });
+  };
 
 
   return (
@@ -176,39 +132,7 @@ const UploadKMZ = () => {
           </Button>
         </div>
       </form>
-      {/* <Row
-        className={`${styles.tableHeader} align-items-center justify-content-between`}
-      >
-        <Col xs={12} md={6} className="d-flex align-items-center">
-          <p className={styles["table-title"]}>
-            <span className="mr-2">
-              <FaBars style={{ marginRight: "10px" }} />
-            </span>
-            Snap Block Update
-          </p>
-        </Col>
-        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
-          <div className="d-flex align-items-center" style={{height: '40px'}}>
-            <span className="mr-2">Per page: &nbsp;</span>
-            <DropdownButton
-                title={itemsPerPage}
-                onSelect={(value) => setItemsPerPage(Number(value))}
-                variant="transparent"  
-                className={`${styles['custom-dropdown-button']}`}
-            >
-                <Dropdown.Item eventKey="5">5</Dropdown.Item>
-                <Dropdown.Item eventKey="10">10</Dropdown.Item>
-                <Dropdown.Item eventKey="15">15</Dropdown.Item>
-            </DropdownButton>
-          </div>
-          <InputGroup className={`${styles['search-bar']}`}>
-            <FormControl
-              placeholder="Search Project..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </InputGroup>
-        </Col>
-      </Row> */}
+      
 
       {/* Table */}
       <Table responsive className={`${styles.table} mt-3`}>
@@ -227,7 +151,11 @@ const UploadKMZ = () => {
                 <td>{index + 1 + currentPage * itemsPerPage}</td>
                 <td>{role.uploadDate}</td>
                 <td>{role.project}</td>
-                <td> <FaMapMarkerAlt className={styles['action-icon']} /> </td>
+                <td> 
+                  <FaMapMarkerAlt 
+                  className={styles['action-icon']}
+                  onClick={() => handleLocationClick(role)}
+                   /> </td>
               </tr>
             ))
           ) : (
@@ -265,41 +193,6 @@ const UploadKMZ = () => {
         breakLinkClassName={"page-link"}
         activeClassName={"active"}
       />
-
-      {/* Dialog for Add/Edit User Role */}
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          {editMode ? "Update Manage Snap Block" : "Add Snap Block"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {editMode
-              ? "Update the Snap Block below."
-              : "To add a new snap Block, please enter the Snap Block name."}
-          </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="role"
-            label={editMode ? "Update Snap Block" : "Add Snap Block"}
-            type="text"
-            fullWidth
-            variant="standard"
-            value={newRole}
-            onChange={(e) => {
-              setNewRole(e.target.value);
-              setError(""); // Clear error message on input change
-            }}
-          />
-          {error && <Alert severity="error">{error}</Alert>}{" "}
-          {/* Display error message */}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={submitForm}>{editMode ? "Update" : "Add"}</Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 };
