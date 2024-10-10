@@ -31,33 +31,19 @@ const Header = ({ toggleSidebar }) => {
           <FaBars />
         </button>
         <NavLink className="navbar-brand" to="/dashboard">
-          <img
-            src="logo_acme.png"
-            className={styles.acme_logo}
-            alt="ACME_LOGO"
-          />
+          <img src="logo_acme.png" className={styles.acme_logo} alt="ACME_LOGO" />
         </NavLink>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-
           {/* Material UI User Dropdown */}
-          <Button
-            aria-controls={open ? "user-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-          >
-            User
+          <Button aria-controls={open ? "user-menu" : undefined} aria-haspopup="true" aria-expanded={open ? "true" : undefined}
+            onClick={handleClick} >
+            Admin
           </Button>
-          <Menu
-            id="user-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
+          <Menu id="user-menu" anchorEl={anchorEl} open={open} onClose={handleClose}
             MenuListProps={{
               "aria-labelledby": "basic-button",
-            }}
-          >
+            }} >
             <MenuItem onClick={handleClose}>
               <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
                 Logout
@@ -68,7 +54,7 @@ const Header = ({ toggleSidebar }) => {
       </div>
     </nav>
     </>
-  );
+   );
 };
 
 export default Header;

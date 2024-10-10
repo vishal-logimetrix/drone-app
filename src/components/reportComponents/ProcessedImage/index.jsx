@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import { Table, Row, Col } from "react-bootstrap";
 import {  Button, TextField} from '@mui/material';
 import { FaBars } from "react-icons/fa";
-
-
 import styles from './processedImg.module.css'
 
-
 const ProcessedImage = () => {
-
 
     const [fromDate, setFromDate] = useState("");  
     const [toDate, setToDate] = useState("");
@@ -16,7 +12,6 @@ const ProcessedImage = () => {
       const handleFromDateChange = (e) => {
         setFromDate(e.target.value);
       };
-    
     
       const handleSubmit = () => {
         const searchData = {
@@ -26,7 +21,6 @@ const ProcessedImage = () => {
     
         console.log(searchData);
       };
-
 
     return (
         <div className={styles["user-role-table"]}>
@@ -52,7 +46,6 @@ const ProcessedImage = () => {
                 },
               }} />
 
-  
             <Button variant="contained" className={styles["form-control"]} style={{ textAlign: "center" }} onClick={handleSubmit} >
               Search
             </Button>
@@ -61,8 +54,8 @@ const ProcessedImage = () => {
             </Button>
           </form>
         </div>
-        <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
-          <Col xs={12} md={6} className="d-flex align-items-center">
+        <Row className={`${styles.tableHeader} align-items-center justify-content-between`} style={{height: '40px'}}>
+          <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '30px'}}> 
             <p className={styles["table-title"]}>
               <span className="mr-2">
                 <FaBars style={{ marginRight: "10px", fontWeight: 900 }} />
@@ -70,19 +63,6 @@ const ProcessedImage = () => {
               Processed images
             </p>
           </Col>
-          {/* <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
-            <div className="d-flex align-items-center" style={{ height: "40px" }}>
-              <span className="mr-2" style={{ color: "white" }}>
-                Per page: &nbsp;
-              </span>
-              <DropdownButton title={itemsPerPage} onSelect={(value) => setItemsPerPage(Number(value))}
-                variant="transparent" className={`${styles["custom-dropdown-button"]}`} >
-                <Dropdown.Item eventKey="5">5</Dropdown.Item>
-                <Dropdown.Item eventKey="10">10</Dropdown.Item>
-                <Dropdown.Item eventKey="15">15</Dropdown.Item>
-              </DropdownButton>
-            </div>
-          </Col> */}
         </Row>
             
         <Table responsive className={styles.table}>
@@ -91,11 +71,9 @@ const ProcessedImage = () => {
             <th>Yesterday Image</th>
             <th>Today Image</th>
             <th>Processed Image</th>
-            
           </tr>
         </thead>
         <tbody>
-
               {/* <tr >
                 <td>kjn</td>
                 <td>mbm</td>

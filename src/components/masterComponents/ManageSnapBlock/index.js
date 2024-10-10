@@ -9,7 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Alert from "@mui/material/Alert"; // Import Alert for displaying error messages
+import Alert from "@mui/material/Alert"; 
 
 import styles from "./managesnapBlock.module.css";
 
@@ -93,7 +93,8 @@ const ManageSnapBlock = () => {
     
     <div className={styles["user-role-table"]}>
       <div className="button" style={{ textAlign: "flex-start", marginBottom: "5px", display: 'flex', gap: '10px'}} >
-        <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone} onChange={(e) => setSelectedDrone(e.target.value)} // Update state
+        <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone} 
+        onChange={(e) => setSelectedDrone(e.target.value)} 
          SelectProps={{
             native: true,
           }}
@@ -125,15 +126,13 @@ const ManageSnapBlock = () => {
           style: {
             height: '40px',  
           }
-        }} 
-        ></TextField>
+        }} />
 
         <Button variant="contained" className= {styles['form-control']} style={{ textAlign: 'center', }}>Search</Button>
-
       </div>
 
-      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
-        <Col xs={12} md={6} className="d-flex align-items-center">
+      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} style={{height: '40px'}}>
+        <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '30px'}}>
           <p className={styles["table-title"]}>
             <span className="mr-2">
               <FaBars style={{ marginRight: "10px", fontWeight: 900 }} />
@@ -141,30 +140,8 @@ const ManageSnapBlock = () => {
             Snap Block Update
           </p>
         </Col>
-        {/* <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
-          <div className="d-flex align-items-center" style={{height: '40px'}}>
-            <span className="mr-2">Per page: &nbsp;</span>
-            <DropdownButton
-                title={itemsPerPage}
-                onSelect={(value) => setItemsPerPage(Number(value))}
-                variant="transparent"  
-                className={`${styles['custom-dropdown-button']}`}
-            >
-                <Dropdown.Item eventKey="5">5</Dropdown.Item>
-                <Dropdown.Item eventKey="10">10</Dropdown.Item>
-                <Dropdown.Item eventKey="15">15</Dropdown.Item>
-            </DropdownButton>
-          </div>
-          <InputGroup className={`${styles['search-bar']}`}>
-            <FormControl
-              placeholder="Search By Area..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </InputGroup>
-        </Col> */}
       </Row>
 
-      {/* Table */}
       <Table responsive className={styles.table}>
         <thead>
           <tr>
@@ -182,9 +159,7 @@ const ManageSnapBlock = () => {
                 <td>{role.id}</td>
                 <td>{role.areaName}</td>
                 <td>
-                  <FaEdit className={styles["action-icon"]} title="Edit"
-                    onClick={() => handleClickOpen(role)} />
-                    {" "} |
+                  <FaEdit className={styles["action-icon"]} title="Edit" onClick={() => handleClickOpen(role)} /> |
                   <FaTrash className={styles["action-icon"]} title="Delete" />
                 </td>
               </tr>
@@ -222,8 +197,7 @@ const ManageSnapBlock = () => {
         nextLinkClassName={`page-link ${styles["prev-next-button"]}`}
         breakClassName={"page-item"}
         breakLinkClassName={"page-link"}
-        activeClassName={"active"}
-      />
+        activeClassName={"active"} />
 
       {/* Dialog for Add/Edit User Role */}
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth >
@@ -236,21 +210,12 @@ const ManageSnapBlock = () => {
               ? "Update the Snap Block below."
               : "To add a new snap Block, please enter the Snap Block name."}
           </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="role"
-            label={editMode ? "Update Snap Block" : "Add Snap Block"}
-            type="text"
-            fullWidth
-            variant="standard"
-            value={newRole}
+          <TextField autoFocus required margin="dense" id="role" label={editMode ? "Update Snap Block" : "Add Snap Block"}
+            type="text" fullWidth variant="standard" value={newRole}
             onChange={(e) => {
               setNewRole(e.target.value);
-              setError(""); // Clear error message on input change
-            }}
-          />
+              setError(""); 
+            }} />
           {error && <Alert severity="error">{error}</Alert>}{" "}
           {/* Display error message */}
         </DialogContent>

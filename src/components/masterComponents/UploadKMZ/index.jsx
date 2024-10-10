@@ -66,18 +66,16 @@ const UploadKMZ = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-<form onSubmit={handleSubmit}> {/* Form wrapper for submit */}
-        <div
-          className="button"
-          style={{
+      <form onSubmit={handleSubmit}> {/* Form wrapper for submit */}
+        <div className="button" style={{
             textAlign: "flex-start",
             marginBottom: "5px",
             display: "flex",
             gap: "10px",
-          }}
-        >
+          }} >
+
           <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone}
-            onChange={(e) => setSelectedDrone(e.target.value)} // Update state
+            onChange={(e) => setSelectedDrone(e.target.value)} 
             SelectProps={{
               native: true,
             }}
@@ -88,9 +86,8 @@ const UploadKMZ = () => {
               style: {
                 height: "40px",
               },
-            }}
-          >
-            {/* Default placeholder option */}
+            }} >
+
             <option value="" disabled defaultValue>
               Select a Project
             </option>
@@ -101,13 +98,8 @@ const UploadKMZ = () => {
             ))}
           </TextField>
 
-          <TextField
-            type="file"
-            required
-            id="file"
-            variant="outlined"
-            className={styles["form-control"]}
-            onChange={(e) => setSelectedFile(e.target.files[0])} // Handle file selection
+          <TextField type="file" required id="file" variant="outlined" className={styles["form-control"]}
+            onChange={(e) => setSelectedFile(e.target.files[0])} 
             sx={{
               height: "40px",
             }}
@@ -117,24 +109,18 @@ const UploadKMZ = () => {
               },
             }}
             inputProps={{
-              accept: '.apk', // Restrict to .apk files
-            }}
-          />
+              accept: '.apk', 
+            }} />
 
-          <Button
-            type="submit" // Submit button
-            variant="contained"
+          <Button type="submit"  variant="contained"
             style={{
               textAlign: "center",
-            }}
-          >
+            }} >
             Upload
           </Button>
         </div>
       </form>
       
-
-      {/* Table */}
       <Table responsive className={`${styles.table} mt-3`}>
         <thead>
           <tr>
@@ -154,14 +140,13 @@ const UploadKMZ = () => {
                 <td> 
                   <FaMapMarkerAlt 
                   className={styles['action-icon']}
-                  onClick={() => handleLocationClick(role)}
-                   /> </td>
+                  onClick={() => handleLocationClick(role)} /> 
+                   </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="notFound"
-                style={{
+              <td colSpan="4" className="notFound" style={{
                   color: "orangered",
                   textAlign: "center",
                   fontWeight: "bold",

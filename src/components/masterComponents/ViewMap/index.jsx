@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './viewMap.module.css'
 
 const ViewMap = () => {
+
+
+    
   return (
     <div id="geomap" className={styles["geomap"]} style={{ height: '400px', width: '100%' }}>
     <iframe

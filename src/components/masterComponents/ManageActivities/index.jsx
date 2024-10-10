@@ -49,7 +49,7 @@ const ManageActivities = () => {
     setNewRole('');
     setEditMode(false);
     setCurrentRoleId(null);
-    setError(''); // Reset error message on close
+    setError('');
   };
 
   const handleClickOpen = (role = null) => {
@@ -68,8 +68,8 @@ const ManageActivities = () => {
     event.preventDefault();
     
     if (newRole.trim() === '') {
-      setError('Role name is required.'); // Set error message if input is empty
-      return; // Stop the form submission
+      setError('Role name is required.');
+      return;
     }
 
     if (editMode) {
@@ -98,32 +98,25 @@ const ManageActivities = () => {
         </Button>
       </div>
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`}>
-        <Col xs={12} md={6} className="d-flex align-items-center">
+        <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '40px'}}>
           <p className={styles['table-title']}>
             <span className="mr-2">
             <FaBars style={{ marginRight: '10px' }} />
             </span>Manage Activities
           </p>
         </Col>
-        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center">
+        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" style={{height: '40px'}}>
           <div className="d-flex align-items-center" style={{height: '40px'}}>
             <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
-            <DropdownButton
-                title={itemsPerPage}
-                onSelect={(value) => setItemsPerPage(Number(value))}
-                variant="transparent"  
-                className={`${styles['custom-dropdown-button']}`}
-            >
+            <DropdownButton title={itemsPerPage} onSelect={(value) => setItemsPerPage(Number(value))} variant="transparent"  
+                className={`${styles['custom-dropdown-button']}`} >
                 <Dropdown.Item eventKey="5">5</Dropdown.Item>
                 <Dropdown.Item eventKey="10">10</Dropdown.Item>
                 <Dropdown.Item eventKey="15">15</Dropdown.Item>
             </DropdownButton>
           </div>
           <InputGroup className={`${styles['search-bar']}`}>
-            <FormControl
-              placeholder="Search Project..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <FormControl placeholder="Search Project..." onChange={(e) => setSearchTerm(e.target.value)} style={{height: '30px'}} />
           </InputGroup>
         </Col>
       </Row>
@@ -145,11 +138,7 @@ const ManageActivities = () => {
               <td>{index + 1 + currentPage * itemsPerPage}</td>
               <td>{role.activityName}</td>
               <td>
-                <FaEdit 
-                  className={styles['action-icon']} 
-                  title='Edit' 
-                  onClick={() => handleClickOpen(role)} // Open dialog in edit mode with current role
-                /> |
+                <FaEdit  className={styles['action-icon']}  title='Edit' onClick={() => handleClickOpen(role)} /> |
                 <FaTrash className={styles['action-icon']} title='Delete' />
               </td>
             </tr>
@@ -168,7 +157,6 @@ const ManageActivities = () => {
         </tbody>
       </Table>
 
-      {/* Pagination */}
       <ReactPaginate
         previousLabel={'< Prev'}
         nextLabel={'Next >'}
@@ -196,22 +184,13 @@ const ManageActivities = () => {
           <DialogContentText>
             {editMode ? 'Update the Activity below.' : 'To add a new Activity, please enter the Activity name.'}
           </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="role"
-            label={editMode ? 'Update Activity' : 'Add Activity'}
-            type="text"
-            fullWidth
-            variant="standard"
-            value={newRole} 
+          <TextField autoFocus required margin="dense" id="role" label={editMode ? 'Update Activity' : 'Add Activity'}
+            type="text" fullWidth variant="standard" value={newRole} 
             onChange={(e) => {
               setNewRole(e.target.value);
-              setError(''); // Clear error message on input change
-            }} 
-          />
-          {error && <Alert severity="error">{error}</Alert>} {/* Display error message */}
+              setError(''); 
+            }}  />
+          {error && <Alert severity="error">{error}</Alert>}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
