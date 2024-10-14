@@ -79,7 +79,7 @@ const AllNotifications = () => {
   return (
     <div className={styles["user-role-table"]}>
       <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
-        <Col xs={12} md={6} className="d-flex align-items-center">
+        <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '30px'}}>
           <p className={styles["table-title"]}>
             <span className="mr-2">
               <FaBars style={{ marginRight: "10px", color: "#fff" }} />
@@ -87,7 +87,7 @@ const AllNotifications = () => {
             Notification's
           </p>
         </Col>
-        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" >
+        <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" style={{height: '30px'}}>
           <div className="d-flex align-items-center" style={{ height: "40px" }}>
             <span className="mr-2" style={{ color: "#fff" }}>
               Per page: &nbsp;
@@ -118,7 +118,7 @@ const AllNotifications = () => {
                 <td>
                   <ListGroup.Item key={index}
                     style={{
-                      padding: "1em",
+                      padding: "5px",
                       border: "1px solid #e4e4e4",
                       display: "flex",
                       justifyContent: "space-between",

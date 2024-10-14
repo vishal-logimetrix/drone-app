@@ -26,6 +26,7 @@
   margin: 0;
   padding: 0;
   background-color: #5bc0de;
+  height: 40px;
 }
 
 .search-bar input {
@@ -161,6 +162,7 @@
   background-color: white;
   border-radius: 0;
   box-shadow: none !important;
+  height: 30px;
 }
 
 .custom-badge {
