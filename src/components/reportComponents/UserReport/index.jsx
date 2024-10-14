@@ -53,20 +53,14 @@ const UserReport = () => {
       selectedProject,
       selectedUsers,
     };
-    console.log(searchData);
     setShowCalendar(true); 
   };
 
   const isButtonDisabled = selectedProject === "" || selectedUsers === "";
 
-  const isFutureOrToday = (date) => {
-    console.log(date)
-    return moment(date).isSameOrAfter(moment(), 'day');  
-  };
-
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button" style={{
+      <div  className={styles["button"]} style={{
           textAlign: "flex-start",
           marginBottom: "5px",
           display: "flex",
@@ -124,23 +118,6 @@ const UserReport = () => {
             startAccessor="start"
             endAccessor="end"
             selectable={true} 
-            // onSelectSlot={(slotInfo) => {
-            //   // Prevent adding events in the past
-            //   if (isFutureOrToday(slotInfo.start)) {
-            //     const title = window.prompt('Enter event title');
-            //     if (title) {
-            //       handleAddEvent({
-            //         title,
-            //         start: slotInfo.start,
-            //         end: slotInfo.end,
-            //         allDay: slotInfo.start.getDate() !== slotInfo.end.getDate(),
-            //       });
-            //     }
-            //   } else {
-            //     alert("You cannot add events to past dates.");
-            //   }
-            // }}
-            // onSelectEvent={(event) => alert(`Event: ${event.title}`)}
             style={{ height: '100%' }}
           />
         </div>
@@ -150,11 +127,6 @@ const UserReport = () => {
 };
 
 export default UserReport;
-
-
-
-
-
 
 
 

@@ -66,7 +66,7 @@ const UploadKMZ = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <form onSubmit={handleSubmit}> {/* Form wrapper for submit */}
+      <form onSubmit={handleSubmit} className={styles["formSection"]}> {/* Form wrapper for submit */}
         <div className="button" style={{
             textAlign: "flex-start",
             marginBottom: "5px",
@@ -74,7 +74,7 @@ const UploadKMZ = () => {
             gap: "10px",
           }} >
 
-          <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone}
+          <TextField select variant="outlined" className={styles["form-control"]} value={selectedDrone} required
             onChange={(e) => setSelectedDrone(e.target.value)} 
             SelectProps={{
               native: true,
@@ -138,10 +138,8 @@ const UploadKMZ = () => {
                 <td>{role.uploadDate}</td>
                 <td>{role.project}</td>
                 <td> 
-                  <FaMapMarkerAlt 
-                  className={styles['action-icon']}
-                  onClick={() => handleLocationClick(role)} /> 
-                   </td>
+                  <FaMapMarkerAlt  className={styles['action-icon']} onClick={() => handleLocationClick(role)} /> 
+                </td>
               </tr>
             ))
           ) : (

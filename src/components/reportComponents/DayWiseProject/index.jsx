@@ -49,7 +49,7 @@ const DayWiseProject = () => {
 
   return (
     <div className={styles["user-role-table"]}>
-      <div className="button" style={{
+      <div  className={styles["button"]} style={{
           textAlign: "flex-start",
           marginBottom: "5px",
           display: "flex",

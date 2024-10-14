@@ -42,7 +42,8 @@
     overflow-y: auto;
     border-right: 1px solid #5bc0de;
     border-left: 1px solid #5bc0de;
-    border-color: #e2e2e2;
+    border-top: 1px solid #5bc0de;
+
   }
   
   .table th {
@@ -52,8 +53,8 @@
     font-weight: 500;
     font-size: 14px;
     border-color: #e2e2e2;
-    border-right: 1px solid #5bc0de;
-    border-top: 1px solid #5bc0de;
+    /* border-right: 1px solid #5bc0de;
+    border-top: 1px solid #5bc0de; */
   }
 
   .table tr{
@@ -165,4 +166,10 @@
     background-color: white;
     border-radius: 0;
     box-shadow: none !important; 
+}
+
+.formSection{
+  border: 1px solid #5bc0de;
+  padding: 15px;
+  background-color: #f6fbfd
 }

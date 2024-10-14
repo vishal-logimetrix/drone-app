@@ -85,8 +85,9 @@ const UploadApk = () => {
 
   return (
     <div className={styles["user-role-table"]}>
+      <form className={styles["formSection"]}>
       <div className="button" style={{ textAlign: "flex-start", marginBottom: "5px", display: 'flex', gap: '10px'}} >
-        <TextField  variant="outlined" className={styles["form-control"]} type="text" label='Enter Version'
+        <TextField  variant="outlined" className={styles["form-control"]} type="text" label='Enter Version' required
         sx={{
           height: '40px', 
         }}
@@ -110,9 +111,9 @@ const UploadApk = () => {
         <Button variant="contained" style={{
             textAlign: 'center',
         }}> Upload</Button>
-
       </div>
-      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} style={{height: '40px'}} >
+      </form>
+      <Row className={`${styles.tableHeader} align-items-center justify-content-between mt-3`} style={{height: '40px'}} >
         <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '30px'}}>
           <p className={styles["table-title"]}>
             <span className="mr-2">
@@ -120,8 +121,9 @@ const UploadApk = () => {
             </span>
             Snap Block Update
           </p>
-        </Col>
+        </Col> 
         <Col xs={12} md={6} className="d-flex justify-content-end align-items-center" style={{height: '40px'}}>
+          
           <div className="d-flex align-items-center" style={{height: '30px'}}>
             <span className="mr-2" style={{color: '#fff'}}>Per page: &nbsp;</span>
             <DropdownButton title={itemsPerPage} onSelect={(value) => setItemsPerPage(Number(value))} variant="transparent"  

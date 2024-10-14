@@ -420,7 +420,7 @@ const ProjectSites = () => {
         </form>
       </div>
 
-      <Row className={`${styles.tableHeader} align-items-center justify-content-between`} >
+      <Row className={`${styles.tableHeader} align-items-center justify-content-between mt-3`} >
 
         <Col xs={12} md={6} className="d-flex align-items-center" style={{height: '40px'}}>
           <p className={styles["table-title"]}>
