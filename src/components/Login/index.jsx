@@ -66,12 +66,7 @@ const Login = () => {
   // Check form validity
   useEffect(() => {
     localStorage.clear();
-    if (
-      !formError.username &&
-      !formError.password &&
-      form.username &&
-      form.password
-    ) {
+    if ( !formError.username && !formError.password && form.username && form.password) {
       setFormIsValid(true);
     } else {
       setFormIsValid(false);
@@ -129,6 +124,7 @@ const Login = () => {
       // setLoginFailed(true);
       // handleClick({ vertical: 'top', horizontal: 'right' });
       // }
+
     } else {
       console.log("Form has errors");
     }
@@ -168,10 +164,10 @@ const Login = () => {
               <input type={showPassword ? "text" : "password"} placeholder="Password" name="password" value={form.password}
                 onChange={handleInputChange} onBlur={handleBlur}
                 style={{
-                  paddingRight: "40px", // Add padding to prevent text overlap with the icon
-                  height: "40px", // Set a consistent height for the input
-                  borderRadius: "4px", // Optional: Add border-radius for better appearance
-                  border: "1px solid #ccc", // Optional: Add border for better appearance
+                  paddingRight: "40px", 
+                  height: "40px",
+                  borderRadius: "4px", 
+                  border: "1px solid #ccc",
                 }}
               />
               <button type="button" onClick={togglePasswordVisibility}
